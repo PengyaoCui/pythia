@@ -1,0 +1,18 @@
+!Tune:pp = 14
+!SoftQCD:inelastic = on
+
+BeamRemnants:remnantMode = 1
+
+ColourReconnection:allowDoubleJunRem = off
+ColourReconnection:junctionCorrection = 1.43
+ColourReconnection:m0 = 2.9
+ColourReconnection:mode = 1
+ColourReconnection:timeDilationMode = 0
+
+MultiPartonInteractions:pT0Ref = 2.12
+
+StringFlav:probQQ1toQQ0join = { 0.0275, 0.0275, 0.0275, 0.0275 }
+StringFlav:probQQtoQ = 0.078
+StringFlav:ProbStoUD = 0.2
+StringZ:aLund = 0.36
+StringZ:bLund = 0.56

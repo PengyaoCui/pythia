@@ -1,0 +1,13 @@
+# 20190523
+- Improvement of the random seed when run on LXPLUS with condor
+
+# 20190524
+- Correction of jet pT binning used to match with V0s
+
+# 20191002
+- Only one jet radius is used in each run
+- Optimized jet match procedure
+- Update on the argument (help) in steer
+
+# 20200323
+- add OC and PC background estimation

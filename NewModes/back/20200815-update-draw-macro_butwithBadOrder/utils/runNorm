@@ -1,0 +1,66 @@
+#!/usr/bin/env python
+
+import argparse
+import subprocess
+import multiprocessing as mp
+###############################################################################
+
+#mod_path = '/usr/local/opt/modules'
+mod_path = '/usr/share/modules'
+mod_init = '{}/init/python.py'.format(mod_path)
+exec(open(mod_init).read())
+###############################################################################
+
+dset_map = {
+     '5ns' : 'pp05d02TeVrs',
+     '5'   : 'pp05d02TeV',
+     '7'   : 'pp07d00TeV',
+    '13'   : 'pp13d00TeV'}
+###############################################################################
+
+exe = 'doNorm.C'
+lss = [ 'Kshort', 'Lambda', 'Xi', 'Omega' ]
+ljs = [ 'Jet10',  'Jet20'  ]
+lms = [ 'Monash', 'BLCmode0', 'BLCmode2', 'BLCmode3' ]
+###############################################################################
+
+parser = argparse.ArgumentParser(
+    description = 'Run root macros driver',
+    epilog      = 'Provided by Xiaoming Zhang',
+    formatter_class=argparse.RawTextHelpFormatter)
+
+parser.add_argument('-d', '--dset',
+    default = '13' , type = str,
+    choices = [ '5ns', '5', '7', '13' ],
+    metavar = 'dataset', dest = 'dset',
+    help   = 'input dataset')
+
+parser.add_argument('-v', '--version',
+    action  = 'version',
+    version = '%(prog)s 2.1')
+
+args = parser.parse_args()
+###############################################################################
+
+def load_env_mod() :
+    if not module('is-loaded', 'root') :
+#       mod_files = 'Local/etc/modulefiles'
+#       module('use', os.environ['HOME'] + '/' + mod_files)
+        module('load', 'root')
+###############################################################################
+
+def run_proc(m) :
+    dset = dset_map[args.dset]
+
+    for s in lss :
+        for j in ljs :
+            cmnd = '{}(\"{}\",\"{}\",\"{}\",\"PySjets/PySjets_{}\")'.format(exe,m,s,j,dset)
+            proc = subprocess.run(['root', '-b', '-q', '-l', cmnd])
+###############################################################################
+
+if __name__ == '__main__' :
+    load_env_mod()
+
+    with mp.Pool(len(lms)) as p :
+        p.map(run_proc, lms)
+###############################################################################

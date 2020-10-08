@@ -1,0 +1,13 @@
+executable = bin/runAnaPyStrangeJets
+
+input  = cfg/AnaPyStrangeJets.cmnd
+log    = log/AnaPyStrangeJets_$(ClusterId)_$(ProcId).log
+output = log/AnaPyStrangeJets_$(ClusterId)_$(ProcId).out
+error  = log/AnaPyStrangeJets_$(ClusterId)_$(ProcId).err
+
++JobFlavour = "longlunch"
+arguments   = $(ClusterId) $(ProcId)
+transfer_output_files = AnalysisResults_$(ClusterId)_$(ProcId).root
+
+initialdir = /home/cuipengyao/study/pythia/NewModes/dXZ20200729/PyBLCmode0/run
+queue 100

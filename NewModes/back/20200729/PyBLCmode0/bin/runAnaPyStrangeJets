@@ -1,0 +1,7 @@
+#!/bin/bash
+source /usr/share/Modules/init/sh
+module use /afs/cern.ch/work/p/pcui/usr/etc/modulefiles
+module load pythia
+export PATH=/home/cuipengyao/study/pythia/NewModes/dXZ20200729/PyBLCmode0/bin:${PATH}
+AnaPyStrangeJets 0.4 0.0 $1 $2
+exit 0

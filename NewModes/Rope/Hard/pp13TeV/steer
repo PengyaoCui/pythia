@@ -1,0 +1,245 @@
+#!/usr/bin/env python2
+
+import argparse
+import os, errno
+from itertools import tee
+###############################################################################
+
+aParser = argparse.ArgumentParser(
+  description = 'Steer of job submission on LXPLUS',
+  epilog      = 'Provided by Xiaoming Zhang',
+  formatter_class=argparse.RawTextHelpFormatter)
+
+aParser.add_argument('-v', '--version',
+  action  = 'version',
+  version = '%(prog)s 2.0')
+
+aParser.add_argument('-j', '--jetR',
+  default = 0.4, type = float,
+  choices = [ 0.2, 0.3, 0.4 ],
+  help    = '''jet resolution parameter
+  default = %(default)s
+  choices = %(choices)s
+  type    = %(type)s''',
+  metavar = 'jr', dest = 'djr')
+
+aParser.add_argument('-d', '--shift',
+  default = 0., type = float,
+  choices = [ 0.465 ],
+  help    = '''rapidity shift (used for p-Pb collisions)
+  default = %(default)s
+  choices = %(choices)s
+  type    = %(type)s''',
+  metavar = 'del', dest = 'ds')
+
+aParser.add_argument('--exec',
+  default = 'AnaPyStrangeJets', type = str,
+  help    = '''exec bin file
+  default = %(default)s
+  type    = %(type)s''',
+  metavar = 'bin', dest = 'sExec')
+
+aParser.add_argument('--que',
+  default = 'longlunch', type = str,
+  choices = [ 'espresso', 'microcentury', 'workday', 'tomorrow', 'testmatch', 'nextweek' ],
+  help    = '''job submission queue
+  default = %(default)s
+  choices = %(choices)s
+  type    = %(type)s
+    | queue        | max duration | LSF name |
+    |--------------|--------------|----------|
+    | espresso     | 20 mim       | 8nm      |
+    | microcentury |  1 h         | 1nh      |
+    | longlunch    |  2 h         | 8nh      |
+    | workday      |  8 h         | 1nd      |
+    | tomorrow     |  1 day       | 2nd      |
+    | testmatch    |  3 day       | 1nw      |
+    | nextweek     |  1 week      | 2nw      |''',
+  metavar = 'flv', dest = 'sque')
+
+aParser.add_argument('--njobs',
+  default = 100, type = int,
+  help    = '''number of jobs per pT hat bin
+  default = %(default)s
+  type    = %(type)s''',
+  metavar = 'nj')
+
+aParser.add_argument('--nevs',
+  default = 50001, type = int,
+  help    = '''number of events per job
+  default = %(default)s
+  type    = %(type)s''',
+  metavar = 'ne')
+
+aParser.add_argument('--ecms',
+  default = 13000., type = float,
+  choices = [ 2760., 5020., 5440., 8000., 8160., 13000. ],
+  help    = '''collision energy in cms frame in GeV
+  default = %(default)s
+  choices = %(choices)s
+  type    = %(type)s''',
+  metavar = 'ec', dest = 'decm')
+
+aParser.add_argument('--fbins',
+  action  = 'store_const',
+  const   = [ 5, 11, 21, 36, 57, 84, -1 ],
+  default = [ 5, 11, 21, 36, 57, -1 ],
+  help    = '''using fine pT hat binning
+  default = %(default)s
+  const   = %(const)s''',
+  dest = 'lbs')
+
+aParser.add_argument('opt',
+  nargs = '?',
+  default = 'setup', type = str,
+  choices = [ 'setup', 'submit', 'clean' ],
+  help    = '''cfg option
+  default = %(default)s
+  choices = %(choices)s
+  type    = %(type)s
+    | option | usage                                   |
+    |--------|-----------------------------------------|
+    | setup  | cfg and generate job submission files   |
+    | submit | submit jobs (do cfg if it is necessary) |
+    | clean  | clean up job files (be careful!!!)      |''')
+
+arg = aParser.parse_args()
+###############################################################################
+
+def pairwise() :
+  ll, lu = tee(arg.lbs)
+
+  next(lu, None)
+  return zip(ll, lu)
+###############################################################################
+
+def get_bin_name(l, u) :
+  sl = str(l).zfill(3)
+  su = str(u).zfill(3) if u != -1 else 'INF'
+  return 'dPtHat_{}_{}'.format(sl,su)
+###############################################################################
+
+def make_dir_check(s) :
+  try :
+    os.makedirs(s)
+  except OSError as exc :
+    if exc.errno == errno.EEXIST and os.path.isdir(s) :
+      pass
+###############################################################################
+
+def cfg_bin(l, u) :
+  sp = 'run/{}'.format(get_bin_name(l,u))
+
+  if os.path.isdir(sp) :
+    print 'dir {} is already existed, skip!!!'.format(sp)
+    return
+
+  make_dir_check('{}/log'.format(sp))
+  make_dir_check('{}/cfg'.format(sp))
+  with open('{}/cfg/{}.cmnd'.format(sp,arg.sExec),'w') as f :
+    f.write('Main:numberOfEvents = {}\n'.format(arg.nevs))
+    f.write('Beams:eCM = {}\n'.format(arg.decm))
+    f.write('HardQCD:all = on\n')
+    f.write('PhaseSpace:pTHatMin = {}.\n'.format(l))
+    f.write('PhaseSpace:pTHatMax = {}.\n'.format(u))
+    f.write('MultiPartonInteractions:pT0Ref = 2.15\n')
+    f.write('BeamRemnants:remnantMode = 1\n')
+    f.write('BeamRemnants:saturation = 5\n')
+    f.write('ColourReconnection:reconnect = on\n')
+    f.write('ColourReconnection:mode = 1\n')
+    f.write('ColourReconnection:allowDoubleJunRem = off\n')
+    f.write('ColourReconnection:m0 = 0.3\n')
+    f.write('ColourReconnection:allowJunctions = on\n')
+    f.write('ColourReconnection:junctionCorrection = 1.2\n')
+    f.write('ColourReconnection:timeDilationMode = 2\n')
+    f.write('ColourReconnection:timeDilationPar = 0.18\n')
+    f.write('Ropewalk:RopeHadronization = on\n')
+    f.write('Ropewalk:doShoving = on\n')
+    f.write('Ropewalk:tInit = 1.5\n')
+    f.write('Ropewalk:deltat = 0.05\n')
+    f.write('Ropewalk:tShove = 0.1\n')
+    f.write('Ropewalk:gAmplitude = 0.\n')
+    f.write('Ropewalk:doFlavour = on\n')
+    f.write('Ropewalk:r0 = 0.5\n')
+    f.write('Ropewalk:m0 = 0.2\n')
+    f.write('Ropewalk:beta = 0.1\n')
+    f.write('PartonVertex:setVertex = on\n')
+    f.write('PartonVertex:protonRadius = 0.7\n')
+    f.write('PartonVertex:emissionWidth = 0.1\n')
+    f.close()
+
+  return sp
+###############################################################################
+
+def cfg_exe() :
+  sp = 'bin'
+  sf = '{}/run{}'.format(sp,arg.sExec)
+  if not os.path.isdir(sp) : os.mkdir(sp)
+
+  with open(sf,'w') as f :
+    f.write('#!/bin/bash\n')
+    f.write('source /usr/share/Modules/init/sh\n')
+    f.write('module use /afs/cern.ch/work/p/pcui/usr/etc/modulefiles\n')
+    #f.write('module use /afs/cern.ch/work/x/xzhang/usr/etc/modulefiles\n')
+    f.write('module load pythia\n')
+    f.write('export PATH={}/bin:${}\n'.format(os.getcwd(),'{PATH}'))
+    f.write('{} {} {} $1 $2\n'.format(arg.sExec,arg.djr,arg.ds))
+    f.write('exit 0')
+    f.close()
+
+  if os.path.isfile(sf) : os.chmod(sf, 0754)
+
+  return sf
+###############################################################################
+
+def run_cfg() :
+  se = cfg_exe()
+
+  lb = []
+  for l, u in pairwise() : lb.append(cfg_bin(l,u))
+
+  sp = 'etc'
+  sf = '{}/run{}.sub'.format(sp,arg.sExec)
+  if not os.path.isdir(sp) : os.mkdir(sp)
+
+  with open(sf,'w') as f :
+    f.write('executable = {}\n'.format(se))
+
+    f.write('\n')
+    f.write('input  = cfg/{}.cmnd\n'.format(arg.sExec))
+    f.write('log    = log/{}_$(ClusterId)_$(ProcId).log\n'.format(arg.sExec))
+    f.write('output = log/{}_$(ClusterId)_$(ProcId).out\n'.format(arg.sExec))
+    f.write('error  = log/{}_$(ClusterId)_$(ProcId).err\n'.format(arg.sExec))
+
+    f.write('\n')
+    f.write('+JobFlavour = \"{}\"\n'.format(arg.sque))
+    f.write('arguments   = $(ClusterId) $(ProcId)\n')
+    f.write('transfer_output_files = AnalysisResults_$(ClusterId)_$(ProcId).root\n')
+
+    for s in lb :
+      f.write('\n')
+      f.write('initialdir = {}/{}\n'.format(os.getcwd(),s))
+      f.write('queue {}\n'.format(arg.njobs))
+
+    f.close()
+
+  return
+###############################################################################
+
+def submit() :
+  sf = 'etc/run{}.sub'.format(arg.sExec)
+  if not os.path.isfile(sf) : run_cfg()
+  os.system('condor_submit {}'.format(sf))
+  return
+###############################################################################
+
+def clean_up() :
+  os.system('rm -rf bin etc run')
+  return
+###############################################################################
+
+if __name__ == '__main__' :
+  if arg.opt == 'setup'  : run_cfg()
+  if arg.opt == 'submit' : submit()
+  if arg.opt == 'clean'  : clean_up()
+###############################################################################

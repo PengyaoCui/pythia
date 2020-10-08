@@ -1,0 +1,12 @@
+
+/home/yintiantian/alice/ali-master/alidist/pythia.sh   --->安装所需shell文件
+在./configure 添加
+--with-fastjet3=/home/yintiantian/alice/sw/slc7_x86-64/fastjet/v3.1.3_1.020-1 \   -----> 与fastjet关联(等号后面是fastjet的路径，可以使用fastjet -config --libs查看)
+
+aliBuild init pythia -z --->下载pythia 
+cd /home/yintiantian/alice 
+aliBuild -z -w ./sw -d build pythia --> build sw 是工作目录，所有软件安装到这里
+
+
+
+

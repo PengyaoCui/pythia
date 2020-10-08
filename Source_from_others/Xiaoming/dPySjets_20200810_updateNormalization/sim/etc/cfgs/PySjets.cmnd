@@ -1,0 +1,7 @@
+Beams:eCM = 13000.
+
+Main:numberOfEvents = 100001
+
+Main:spareParm1 = 0.4
+Main:spareParm2 = 0.0
+Main:spareFlag1 = off

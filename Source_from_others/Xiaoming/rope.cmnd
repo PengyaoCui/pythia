@@ -1,0 +1,37 @@
+# Rope setting
+
+Beams:idA = 2212
+Beams:idB = 2212
+
+## QCD based CR for lower multiplet formation
+ColourReconnection:mode = 1
+ColourReconnection:m0 = 0.3
+ColourReconnection:allowJunctions = on
+ColourReconnection:allowDoubleJunRem = off
+ColourReconnection:junctionCorrection = 1.2
+ColourReconnection:timeDilationMode = 2
+ColourReconnection:timeDilationPar = 0.18
+
+BeamRemnants:remnantMode = 1
+BeamRemnants:saturation = 5
+
+MultiPartonInteractions:pT0Ref = 2.15
+
+## Ropes and shoving
+PartonVertex:setVertex = on
+##PartonVertex:protonRadius = 0.7  ##default value
+##PartonVertex:emissionWidth = 0.1 ##default value
+
+Ropewalk:RopeHadronization = on
+
+Ropewalk:doShoving = on
+Ropewalk:tInit = 1.5
+Ropewalk:tShove = 0.1
+
+Ropewalk:deltat = 0.05
+Ropewalk:gAmplitude = 0.
+
+Ropewalk:doFlavour = on
+Ropewalk:r0 = 0.5
+Ropewalk:m0 = 0.2
+Ropewalk:beta = 0.1

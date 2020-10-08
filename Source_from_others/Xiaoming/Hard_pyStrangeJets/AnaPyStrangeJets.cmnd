@@ -1,0 +1,4 @@
+Main:numberOfEvents = 5001
+Beams:eCM = 13000.
+HardQCD:all = on
+PhaseSpace:pTHatMin = 11.

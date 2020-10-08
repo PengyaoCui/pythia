@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+module load dot pythia
+PySjets 0.4 0. 1 1
+#
+exit 0

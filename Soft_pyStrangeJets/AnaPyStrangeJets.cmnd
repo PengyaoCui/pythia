@@ -1,0 +1,7 @@
+Main:numberOfEvents = 501
+Beams:eCM = 13000.
+SoftQCD:nonDiffractive = on
+ColourReconnection:reconnect = on
+ColourReconnection:mode = 1
+//BeamRemnants:remnantMode = 1
+//ColourReconnection:mode = 2

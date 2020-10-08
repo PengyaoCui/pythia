@@ -1,0 +1,25 @@
+# Shoving
+
+Beams:idA = 2212
+Beams:idB = 2212
+
+PartonVertex:setVertex = on
+
+Ropewalk:RopeHadronization = on
+
+Ropewalk:doShoving = on
+Ropewalk:tInit = 1.5
+Ropewalk:tShove = 1.
+
+Ropewalk:deltay = 0.1
+Ropewalk:deltat = 0.1
+Ropewalk:gAmplitude = 4.0
+
+Ropewalk:limitMom = on
+Ropewalk:pTcut = 2.0
+Ropewalk:rCutOff = 10.0
+Ropewalk:gExponent = 1.0
+
+Ropewalk:doFlavour = off
+Ropewalk:r0 = 0.41
+Ropewalk:m0 = 0.2

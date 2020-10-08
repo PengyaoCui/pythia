@@ -1,0 +1,7 @@
+Tune:pp = 14
+SoftQCD:inelastic = on
+
+Beams:eCM = 13000.
+Main:numberOfEvents = 5001
+
+Main:spareMode1 = 2 ! BLC mode
