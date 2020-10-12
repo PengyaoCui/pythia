@@ -18,8 +18,10 @@ void d31_LKRatioSignificance_NSig(){
     dCent[0] =  h[0]->GetBinContent(i); dCent[1] =  h[1]->GetBinContent(i); dCent[2] =  h[2]->GetBinContent(i);
     dStat[0] =  h[0]->GetBinError(i);   dStat[1] =  h[1]->GetBinError(i);   dStat[2] =  h[2]->GetBinError(i);
     dSyst[0] = hE[0]->GetBinContent(i); dSyst[1] = hE[1]->GetBinContent(i); dSyst[2] = hE[2]->GetBinContent(i);
-    auto dNSigma0 = TMath::Abs(dCent[0] - dCent[1])/TMath::Sqrt(dStat[0]*dStat[0] + dSyst[0]*dSyst[0] + dStat[1]*dStat[1] + dSyst[1]*dSyst[1]);
-    auto dNSigma2 = TMath::Abs(dCent[2] - dCent[1])/TMath::Sqrt(dStat[2]*dStat[2] + dSyst[2]*dSyst[2] + dStat[1]*dStat[1] + dSyst[1]*dSyst[1]);
+    auto dNSigma0 = TMath::Abs(dCent[0] - dCent[1])/TMath::Sqrt(dStat[0]*dStat[0] + dStat[1]*dStat[1]);
+    auto dNSigma2 = TMath::Abs(dCent[2] - dCent[1])/TMath::Sqrt(dStat[2]*dStat[2] + dStat[1]*dStat[1]);
+    //auto dNSigma0 = TMath::Abs(dCent[0] - dCent[1])/TMath::Sqrt(dStat[0]*dStat[0] + dSyst[0]*dSyst[0] + dStat[1]*dStat[1] + dSyst[1]*dSyst[1]);
+    //auto dNSigma2 = TMath::Abs(dCent[2] - dCent[1])/TMath::Sqrt(dStat[2]*dStat[2] + dSyst[2]*dSyst[2] + dStat[1]*dStat[1] + dSyst[1]*dSyst[1]);
     hNSigma0->SetBinContent(i, dNSigma0); hNSigma0->SetBinError(i, 0);
     hNSigma2->SetBinContent(i, dNSigma2); hNSigma2->SetBinError(i, 0);
   } 
