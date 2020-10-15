@@ -1,6 +1,6 @@
 #include "./SourceFun.h"
 
-void draw_DataPy(const TString sType = "Lambda_sum"){
+void draw_DataPy(const TString sType = "Xi"){
 
 
   auto sLatex("pp #sqrt{#it{s}} = 13 TeV");
