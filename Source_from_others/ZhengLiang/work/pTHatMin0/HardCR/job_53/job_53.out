@@ -1,0 +1,366 @@
+iopp054.grid.local
+	linux-vdso.so.1 =>  (0x00007fff631fd000)
+	libCore.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libCore.so (0x00002b4e81dc9000)
+	libCint.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libCint.so (0x00002b4e827a3000)
+	libRIO.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libRIO.so (0x00002b4e8313f000)
+	libNet.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libNet.so (0x00002b4e8355c000)
+	libHist.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libHist.so (0x00002b4e838eb000)
+	libGraf.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libGraf.so (0x00002b4e8402f000)
+	libGraf3d.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libGraf3d.so (0x00002b4e84421000)
+	libGpad.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libGpad.so (0x00002b4e84750000)
+	libTree.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libTree.so (0x00002b4e84a43000)
+	libRint.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libRint.so (0x00002b4e84e8a000)
+	libPostscript.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libPostscript.so (0x00002b4e850bc000)
+	libMatrix.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libMatrix.so (0x00002b4e8532d000)
+	libPhysics.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libPhysics.so (0x00002b4e85799000)
+	libMathCore.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libMathCore.so (0x00002b4e85a3d000)
+	libThread.so => /softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/libThread.so (0x00002b4e85e94000)
+	libdl.so.2 => /lib64/libdl.so.2 (0x0000003d00c00000)
+	libstdc++.so.6 => /usr/lib64/libstdc++.so.6 (0x0000003d14200000)
+	libm.so.6 => /lib64/libm.so.6 (0x0000003d00800000)
+	libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x0000003d10e00000)
+	libpthread.so.0 => /lib64/libpthread.so.0 (0x0000003d01000000)
+	libc.so.6 => /lib64/libc.so.6 (0x0000003d00400000)
+	libz.so.1 => /usr/lib64/libz.so.1 (0x0000003d01400000)
+	libcrypto.so.6 => /lib64/libcrypto.so.6 (0x0000003d0ae00000)
+	libssl.so.6 => /lib64/libssl.so.6 (0x0000003d0da00000)
+	libfreetype.so.6 => /usr/lib64/libfreetype.so.6 (0x0000003d03c00000)
+	/lib64/ld-linux-x86-64.so.2 (0x0000003d00000000)
+	libgssapi_krb5.so.2 => /usr/lib64/libgssapi_krb5.so.2 (0x0000003d0ce00000)
+	libkrb5.so.3 => /usr/lib64/libkrb5.so.3 (0x0000003d0be00000)
+	libcom_err.so.2 => /lib64/libcom_err.so.2 (0x0000003d09e00000)
+	libk5crypto.so.3 => /usr/lib64/libk5crypto.so.3 (0x0000003d0ba00000)
+	libkrb5support.so.0 => /usr/lib64/libkrb5support.so.0 (0x0000003d0d200000)
+	libkeyutils.so.1 => /lib64/libkeyutils.so.1 (0x0000003d0b200000)
+	libresolv.so.2 => /lib64/libresolv.so.2 (0x0000003d08a00000)
+	libselinux.so.1 => /lib64/libselinux.so.1 (0x0000003d08200000)
+	libsepol.so.1 => /lib64/libsepol.so.1 (0x0000003d08600000)
+./:/softwares/common/soft/root/x86_64_sl4/v5-34-05/lib/:/usr/lib64/:/lib64/:
+Info in <AnaPythiaCR::main>: argv[0] = ./AnaPythia.exe
+Info in <AnaPythiaCR::main>: argv[1] = newQCD_Monash_Flavor
+Info in <AnaPythiaCR::main>: argv[2] = Hard
+Info in <AnaPythiaCR::main>: argv[3] = ON
+Info in <AnaPythiaCR::main>: argv[4] = 1
+Info in <AnaPythiaCR::main>: argv[5] = 21
+Info in <AnaPythiaCR::CheckQCDFlag>: HardQCD:all = on
+Info in <AnaPythiaCR::CheckCRFlag>: CR status: ON
+Info in <AnaPythiaCR::CheckCRFlag>: ColourReconnection:reconnect = on
+Info in <AnaPythiaCR::CheckCRMode>: ColourReconnection:mode = 1
+Info in <AnaPythiaCR::GetRandomSeed>: Proc ID     = 31730
+Info in <AnaPythiaCR::GetRandomSeed>: System time = 1615935137
+Info in <AnaPythiaCR::GetRandomSeed>: Random number seed = 15903407
+
+ *------------------------------------------------------------------------------------* 
+ |                                                                                    | 
+ |  *------------------------------------------------------------------------------*  | 
+ |  |                                                                              |  | 
+ |  |                                                                              |  | 
+ |  |   PPP   Y   Y  TTTTT  H   H  III    A      Welcome to the Lund Monte Carlo!  |  | 
+ |  |   P  P   Y Y     T    H   H   I    A A     This is PYTHIA version 8.235      |  | 
+ |  |   PPP     Y      T    HHHHH   I   AAAAA    Last date of change: 27 Mar 2018  |  | 
+ |  |   P       Y      T    H   H   I   A   A                                      |  | 
+ |  |   P       Y      T    H   H  III  A   A    Now is 08 Jan 2019 at 19:26:34    |  | 
+ |  |                                                                              |  | 
+ |  |   Christian Bierlich;  Department of Astronomy and Theoretical Physics,      |  | 
+ |  |      Lund University, Solvegatan 14A, SE-223 62 Lund, Sweden;                |  | 
+ |  |      e-mail: christian.bierlich@thep.lu.se                                   |  | 
+ |  |   Nishita Desai;  Laboratoire Charles Coulomb (L2C),                         |  | 
+ |  |      CNRS-Universite de Montpellier, 34090 Montpellier, France;              |  | 
+ |  |      e-mail: nishita.desai@umontpellier.fr                                   |  | 
+ |  |   Nadine Fischer;  School of Physics,                                        |  | 
+ |  |      Monash University, PO Box 27, 3800 Melbourne, Australia;                |  | 
+ |  |      e-mail: nadine.fischer@monash.edu                                       |  | 
+ |  |   Ilkka Helenius;  Institute for Theoretical Physics,                        |  | 
+ |  |     Tuebingen University, Auf der Morgenstelle 14, 72076 Tuebingen, Germany; |  | 
+ |  |      e-mail: ilkka.helenius@uni-tuebingen.de                                 |  | 
+ |  |   Philip Ilten;  School of Physics and Astronomy,                            |  | 
+ |  |      University of Birmingham, Birmingham, B152 2TT, UK;                     |  | 
+ |  |      e-mail: philten@cern.ch                                                 |  | 
+ |  |   Leif Lonnblad;  Department of Astronomy and Theoretical Physics,           |  | 
+ |  |      Lund University, Solvegatan 14A, SE-223 62 Lund, Sweden;                |  | 
+ |  |      e-mail: leif.lonnblad@thep.lu.se                                        |  | 
+ |  |   Stephen Mrenna;  Computing Division, Simulations Group,                    |  | 
+ |  |      Fermi National Accelerator Laboratory, MS 234, Batavia, IL 60510, USA;  |  | 
+ |  |      e-mail: mrenna@fnal.gov                                                 |  | 
+ |  |   Stefan Prestel;  Theoretical Physics Department,                           |  | 
+ |  |      Fermi National Accelerator Laboratory, MS 106, Batavia, IL 60510, USA;  |  | 
+ |  |      e-mail: sprestel@fnal.gov                                               |  | 
+ |  |   Christine O. Rasmussen;  Department of Astronomy and Theoretical Physics,  |  | 
+ |  |      Lund University, Solvegatan 14A, SE-223 62 Lund, Sweden;                |  | 
+ |  |      e-mail: christine.rasmussen@thep.lu.se                                  |  | 
+ |  |   Torbjorn Sjostrand;  Department of Astronomy and Theoretical Physics,      |  | 
+ |  |      Lund University, Solvegatan 14A, SE-223 62 Lund, Sweden;                |  | 
+ |  |      e-mail: torbjorn@thep.lu.se                                             |  | 
+ |  |   Peter Skands;  School of Physics,                                          |  | 
+ |  |      Monash University, PO Box 27, 3800 Melbourne, Australia;                |  | 
+ |  |      e-mail: peter.skands@monash.edu                                         |  | 
+ |  |                                                                              |  | 
+ |  |   The main program reference is 'An Introduction to PYTHIA 8.2',             |  | 
+ |  |   T. Sjostrand et al, Comput. Phys. Commun. 191 (2015) 159                   |  | 
+ |  |   [arXiv:1410.3012 [hep-ph]]                                                 |  | 
+ |  |                                                                              |  | 
+ |  |   The main physics reference is the 'PYTHIA 6.4 Physics and Manual',         |  | 
+ |  |   T. Sjostrand, S. Mrenna and P. Skands, JHEP05 (2006) 026 [hep-ph/0603175]  |  | 
+ |  |                                                                              |  | 
+ |  |   An archive of program versions and documentation is found on the web:      |  | 
+ |  |   http://www.thep.lu.se/Pythia                                               |  | 
+ |  |                                                                              |  | 
+ |  |   This program is released under the GNU General Public Licence version 2.   |  | 
+ |  |   Please respect the MCnet Guidelines for Event Generator Authors and Users. |  | 
+ |  |                                                                              |  | 
+ |  |   Disclaimer: this program comes without any guarantees.                     |  | 
+ |  |   Beware of errors and use common sense when interpreting results.           |  | 
+ |  |                                                                              |  | 
+ |  |   Copyright (C) 2018 Torbjorn Sjostrand                                      |  | 
+ |  |                                                                              |  | 
+ |  |                                                                              |  | 
+ |  *------------------------------------------------------------------------------*  | 
+ |                                                                                    | 
+ *------------------------------------------------------------------------------------* 
+
+
+ *-------  PYTHIA Process Initialization  --------------------------*
+ |                                                                  |
+ | We collide p+ with p+ at a CM energy of 1.300e+04 GeV            |
+ |                                                                  |
+ |------------------------------------------------------------------|
+ |                                                    |             |
+ | Subprocess                                    Code |   Estimated |
+ |                                                    |    max (mb) |
+ |                                                    |             |
+ |------------------------------------------------------------------|
+ |                                                    |             |
+ | g g -> g g                                     111 |   1.304e+04 |
+ | g g -> q qbar (uds)                            112 |   9.563e+01 |
+ | q g -> q g                                     113 |   5.578e+03 |
+ | q q(bar)' -> q q(bar)'                         114 |   9.280e+02 |
+ | q qbar -> g g                                  115 |   4.288e+00 |
+ | q qbar -> q' qbar' (uds)                       116 |   1.185e+00 |
+ | g g -> c cbar                                  121 |   5.013e+01 |
+ | q qbar -> c cbar                               122 |   4.837e-01 |
+ | g g -> b bbar                                  123 |   3.519e+00 |
+ | q qbar -> b bbar                               124 |   2.130e-02 |
+ |                                                                  |
+ *-------  End PYTHIA Process Initialization -----------------------*
+
+ *-------  PYTHIA Multiparton Interactions Initialization  ---------* 
+ |                                                                  | 
+ |                   sigmaNonDiffractive =    56.42 mb              | 
+ |                                                                  | 
+ |    pT0 =  2.81 gives sigmaInteraction =   268.11 mb: accepted    | 
+ |                                                                  | 
+ *-------  End PYTHIA Multiparton Interactions Initialization  -----* 
+
+ *-------  PYTHIA Flag + Mode + Parm + Word + FVec + MVec + PVec + WVec Settings (changes only)  ------------------* 
+ |                                                                                                                 | 
+ | Name                                          |                      Now |      Default         Min         Max | 
+ |                                               |                          |                                      | 
+ | BeamRemnants:remnantMode                      |                        1 |            0           0           1 | 
+ | Beams:eCM                                     |                13000.000 |    14000.000    10.00000             | 
+ | ColourReconnection:mode                       |                        1 |            0           0           4 | 
+ | HardQCD:all                                   |                       on |          off                         | 
+ | Main:numberOfEvents                           |                    50000 |         1000           0             | 
+ | MultipartonInteractions:ecmPow                |                  0.25208 |      0.21500         0.0     0.50000 | 
+ | MultipartonInteractions:expPow                |                  1.60000 |      1.85000     0.40000    10.00000 | 
+ | MultipartonInteractions:pT0Ref                |                  2.40240 |      2.28000     0.50000    10.00000 | 
+ | Next:numberShowEvent                          |                        0 |            1           0             | 
+ | Next:numberShowInfo                           |                        0 |            1           0             | 
+ | Next:numberShowProcess                        |                        0 |            1           0             | 
+ | ParticleDecays:limitTau0                      |                       on |          off                         | 
+ | Random:seed                                   |                 15903407 |           -1               900000000 | 
+ | Random:setSeed                                |                       on |          off                         | 
+ | Tune:pp                                       |                       18 |           14          -1          34 | 
+ |                                                                                                                 | 
+ *-------  End PYTHIA Flag + Mode + Parm + Word + FVec + MVec + PVec + WVec Settings  -----------------------------* 
+
+ --------  PYTHIA Particle Data Table (changed only)  ------------------------------------------------------------------------------
+ 
+      id   name            antiName         spn chg col      m0        mWidth      mMin       mMax       tau0    res dec ext vis wid
+             no onMode   bRatio   meMode     products 
+
+     211  pi+              pi-                1   3   0    0.13957    0.00000    0.00000    0.00000  7.80450e+03   0   0   0   1   0
+              0     1   0.9998770    0      -13       14 
+              1     1   0.0001230    0      -11       12 
+
+     310  K_S0                                1   0   0    0.49761    0.00000    0.00000    0.00000  2.68420e+01   0   0   0   1   0
+              0     1   0.6922420    0      211     -211 
+              1     1   0.3070073    0      111      111 
+              2     1   0.0000479   12      211     -211       11      -11 
+              3     1   0.0003501   22      -12       11      211 
+              4     1   0.0003501   22       12      -11     -211 
+              5     1   0.0000026    0       22       22 
+
+     321  K+               K-                 1   3   0    0.49368    0.00000    0.00000    0.00000  3.71300e+03   0   0   0   1   0
+              0     1   0.6355250    0      -13       14 
+              1     1   0.0000158    0      -11       12 
+              2     1   0.2066081    0      211      111 
+              3     1   0.0559022    0      211      211     -211 
+              4     1   0.0176107    0      211      111      111 
+              5     1   0.0507020   22       12      -11      111 
+              6     1   0.0335313   22       14      -13      111 
+              7     1   0.0000220    0      -11       12      111      111 
+              8     1   0.0000409    0      -11       12      211     -211 
+              9     1   0.0000140    0      -13       14      111      111 
+             10     1   0.0000280    0      -13       14      211     -211 
+
+     333  phi                                 3   0   0    1.01946    0.00426    1.00000    1.04000  0.00000e+00   0   0   0   1   0
+              0     1   0.4893042    2      321     -321 
+              1     1   0.3422127    2      130      310 
+              2     1   0.0420984    0     -213      211 
+              3     1   0.0420984    0      113      111 
+              4     1   0.0420984    0      213     -211 
+              5     1   0.0270000    1      211     -211      111 
+              6     1   0.0130981    0      221       22 
+              7     1   0.0012708    0      111       22 
+              8     1   0.0002956    0       11      -11 
+              9     1   0.0002872    0       13      -13 
+             10     1   0.0001151   11      221       11      -11 
+             11     1   0.0000740    2      211     -211 
+             12     1   0.0000470    0      223      111 
+
+    2212  p+               pbar-              2   3   0    0.93827    0.00000    0.00000    0.00000  0.00000e+00   0   0   0   1   0
+
+    3122  Lambda0          Lambdabar0         2   0   0    1.11568    0.00000    0.00000    0.00000  7.89000e+01   0   0   0   1   0
+              0     1   0.6391668    0     2212     -211 
+              1     1   0.3580935    0     2112      111 
+              2     1   0.0017505    0     2112       22 
+              3     1   0.0008322   22      -12       11     2212 
+              4     1   0.0001570   22      -14       13     2212 
+
+    3312  Xi-              Xibar+             2  -3   0    1.32171    0.00000    0.00000    0.00000  4.91000e+01   0   0   0   1   0
+              0     1   0.9988730    0     3122     -211 
+              1     1   0.0001270    0     3112       22 
+              2     1   0.0005630   22      -12       11     3122 
+              3     1   0.0003500   22      -14       13     3122 
+              4     1   0.0000870   22      -12       11     3212 
+
+    3334  Omega-           Omegabar+          4  -3   0    1.67245    0.00000    0.00000    0.00000  2.46100e+01   0   0   0   1   0
+              0     1   0.6737955    0     3122     -321 
+              1     1   0.2345365    0     3322     -211 
+              2     1   0.0854667    0     3312      111 
+              3     1   0.0006360    0     3324     -211 
+              4     1   0.0055653   22      -12       11     3322 
+
+ --------  End PYTHIA Particle Data Table  -----------------------------------------------------------------------------------------
+
+Info in <AnaPythiaCR::main>: ColourReconnection:mode  = 1
+Info in <AnaPythiaCR::main>: BeamRemnants:remnantMode = 1
+ PYTHIA Warning in StringFragmentation::fragmentToJunction: bad convergence junction rest frame  
+ PYTHIA Warning in SpaceShower::pT2nextQCD: weight above unity  
+ PYTHIA Warning in PhaseSpace2to2tauyz::trialKin: maximum for cross section violated  
+ PYTHIA Warning in JunctionSplitting::SplitJunPairs: parallel junction state not allowed.  
+ PYTHIA Warning in JunctionSplitting::CheckColours: Not possible to split junctions; making new colours  
+ PYTHIA Warning in JunctionSplitting::CheckColours: Made a gluon colour singlet; redoing colours  
+ PYTHIA Error in StringFragmentation::fragment: stuck in joining  
+ PYTHIA Error in Pythia::next: hadronLevel failed; try again  
+ PYTHIA Warning in Pythia::check: not quite matched particle energy/momentum/mass  
+ PYTHIA Error in StringFragmentation::fragmentToJunction: caught in junction flavour loop  
+
+ Pythia::next(): 1000 events have been generated 
+ PYTHIA Error in MiniStringFragmentation::fragment: no 1- or 2-body state found above mass threshold  
+
+ Pythia::next(): 2000 events have been generated 
+
+ Pythia::next(): 3000 events have been generated 
+ PYTHIA Warning in Pythia::check: energy-momentum not quite conserved  
+
+ Pythia::next(): 4000 events have been generated 
+
+ Pythia::next(): 5000 events have been generated 
+ PYTHIA Warning in StringFragmentation::finalRegion: random axis needed to break tie  
+
+ Pythia::next(): 6000 events have been generated 
+
+ Pythia::next(): 7000 events have been generated 
+
+ Pythia::next(): 8000 events have been generated 
+
+ Pythia::next(): 9000 events have been generated 
+
+ Pythia::next(): 10000 events have been generated 
+
+ Pythia::next(): 11000 events have been generated 
+
+ Pythia::next(): 12000 events have been generated 
+
+ Pythia::next(): 13000 events have been generated 
+
+ Pythia::next(): 14000 events have been generated 
+
+ Pythia::next(): 15000 events have been generated 
+ PYTHIA Warning in MiniStringFragmentation::ministring2two: random axis needed to break tie  
+ PYTHIA Error in SpaceShower::pT2nearThreshold: stuck in loop  
+
+ Pythia::next(): 16000 events have been generated 
+ PYTHIA Warning in StringFragmentation::fragmentToJunction: Negative invariant masses in junction rest frame  
+
+ Pythia::next(): 17000 events have been generated 
+
+ Pythia::next(): 18000 events have been generated 
+
+ Pythia::next(): 19000 events have been generated 
+
+ Pythia::next(): 20000 events have been generated 
+
+ Pythia::next(): 21000 events have been generated 
+
+ Pythia::next(): 22000 events have been generated 
+
+ Pythia::next(): 23000 events have been generated 
+
+ Pythia::next(): 24000 events have been generated 
+
+ Pythia::next(): 25000 events have been generated 
+
+ Pythia::next(): 26000 events have been generated 
+
+ Pythia::next(): 27000 events have been generated 
+
+ Pythia::next(): 28000 events have been generated 
+
+ Pythia::next(): 29000 events have been generated 
+
+ Pythia::next(): 30000 events have been generated 
+
+ Pythia::next(): 31000 events have been generated 
+
+ Pythia::next(): 32000 events have been generated 
+
+ Pythia::next(): 33000 events have been generated 
+
+ Pythia::next(): 34000 events have been generated 
+
+ Pythia::next(): 35000 events have been generated 
+
+ Pythia::next(): 36000 events have been generated 
+
+ Pythia::next(): 37000 events have been generated 
+
+ Pythia::next(): 38000 events have been generated 
+
+ Pythia::next(): 39000 events have been generated 
+
+ Pythia::next(): 40000 events have been generated 
+
+ Pythia::next(): 41000 events have been generated 
+
+ Pythia::next(): 42000 events have been generated 
+
+ Pythia::next(): 43000 events have been generated 
+
+ Pythia::next(): 44000 events have been generated 
+
+ Pythia::next(): 45000 events have been generated 
+
+ Pythia::next(): 46000 events have been generated 
+
+ Pythia::next(): 47000 events have been generated 
+
+ Pythia::next(): 48000 events have been generated 
+
+ Pythia::next(): 49000 events have been generated 
+Info in <AnaPythiaCR::main>: DONE
+
+real	4m28.121s
+user	4m27.381s
+sys	0m0.253s
