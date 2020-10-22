@@ -1,0 +1,45 @@
+Beams:idA = 2212
+Beams:idB = 1000822080 // The lead ion.
+Beams:eA = 4000
+Beams:eB = 1570
+Beams:frameType = 2
+
+HeavyIon:SigFitErr = "
+         "0.02,0.02,0.1,0.05,0.05,0.0,0.1,0.0
+HeavyIon:SigFitDefPar = "
+         "17.24,2.15,0.33,0.0,0.0,0.0,0.0,0.0
+HeavyIon:SigFitNGen = 20
+
+//Main:numberOfEvents = 1001
+//SoftQCD:all = on
+//
+//MultiPartonInteractions:pT0Ref = 2.15
+//BeamRemnants:remnantMode = 1
+//BeamRemnants:saturation = 5
+//ColourReconnection:reconnect = on
+//ColourReconnection:mode = 1
+//ColourReconnection:allowDoubleJunRem = off
+//ColourReconnection:m0 = 0.3
+//ColourReconnection:allowJunctions = on
+//ColourReconnection:junctionCorrection = 1.2
+//ColourReconnection:timeDilationMode = 2
+//ColourReconnection:timeDilationPar = 0.18
+
+//Ropewalk:RopeHadronization = on
+//Ropewalk:doShoving = on
+//Ropewalk:tInit = 1.5 # Propagation time
+//Ropewalk:deltat = 0.05
+//Ropewalk:tShove = 0.1
+//Ropewalk:gAmplitude = 0. # Set shoving strength to 0 explicitly
+//
+//Ropewalk:doFlavour = on
+//Ropewalk:r0 = 0.5
+//Ropewalk:m0 = 0.2
+//Ropewalk:beta = 0.1
+
+!// Enabling setting of vertex information.
+//PartonVertex:setVertex = on
+//PartonVertex:protonRadius = 0.7
+//PartonVertex:emissionWidth = 0.1
+
+                                                        
