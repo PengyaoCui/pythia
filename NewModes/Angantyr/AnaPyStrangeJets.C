@@ -38,12 +38,10 @@ int main(int argc, char *argv[])
 
   pythia.readFile(Form("%s.cmnd",sf.Data()));
 
-  //pythia.readString("Tune:pp = 14");
   pythia.readString("Next:numberShowInfo = 0");
   pythia.readString("Next:numberShowProcess = 0");
   pythia.readString("Next:numberShowEvent = 0");
 
-  //pythia.readString("ParticleDecays:limitTau0 = 0");
   pythia.readString("ParticleDecays:limitTau0 = on");
   pythia.readString("ParticleDecays:tau0Max = 10");
   pythia.readString("333:mayDecay = off");
@@ -54,50 +52,6 @@ int main(int argc, char *argv[])
   pythia.readString("Random:setSeed = on");
   pythia.readString(Form("Random:seed = %d", kSeed - kClusID + 9*kProcID));
 
-
-//============================================================================
-  // There will be eight centrality bins based on the sum transverse
-  // emergy in a rapidity interval between -4.9 and -3.2. The borders
-  // between the classes have been read off the plot in the paper:
-  double explim[] = {90.0, 66.0, 53.0, 41.0, 32.0, 24.0, 13.0, 6.0};
-  // Alternatively we can obtain the borders from the generated
-  // transverse energy spectrum. The default settings should give
-  // approximately the following:
-  double genlim[] = {77.5, 54.5, 44.4, 34.1, 27.6, 22.5, 14.2, 3.5};
-  // If you change any parameters these should also be changed.
-
-  // The upper edge of the correponding percentiles:
-  double pclim[] = {0.01, 0.05, 0.1, 0.2, 0.3, 0.4, 0.6, 0.9};
-
-  // Book the pseudorapidity histograms and get counter for sum of
-  // event weights:
-  typedef map<double,int,std::greater<double> > MapIdx;
-  MapIdx expetaidx, genetaidx;
-  vector<Hist*> expetadist(8), genetadist(8);
-  string expetaname("EtadistCexp"), genetaname("EtadistCgen");
-  vector<double> expsumw(8, 0.0), gensumw(8, 0.0);
-  for ( int i = 0; i < 8; ++i ) {
-    expetaidx[explim[i]] = i;
-    expetadist[i] = new Hist(expetaname + char('0' + i), 54, -2.7, 2.7);
-    genetaidx[genlim[i]] = i;
-    genetadist[i] = new Hist(genetaname + char('0' + i), 54, -2.7, 2.7);
-  }
-
-  // Book histogram for the centrality measure.
-  Hist sumet("SumETfwd", 100, 0.0, 200.0);
-  // Also make a map of all weight to check the generated centrality
-  // classes.
-  multimap<double,double> gencent;
-
-  // Book a histogram for the distribution of number of wounded
-  // nucleons.
-  Hist wounded("Nwounded", 60, -0.5, 59.5);
-
-  // Sum up the weights of all generated events.
-  double sumw = 0.0;
-
-  // Initialise Pythia.
-//============================================================================
   pythia.init();
 //=============================================================================
 
@@ -163,61 +117,8 @@ int main(int argc, char *argv[])
 
   TStopwatch timer; timer.Start();
   for (auto iEvent=0; iEvent<pythia.mode("Main:numberOfEvents"); ++iEvent) if (pythia.next()) {
-
     vConstis.resize(0);
     vStrgs.resize(0);
-    double etfwd = 0.0;
-    bool trigfwd = false;
-    bool trigbwd = false;
-    for (int i = 0; i < pythia.event.size(); ++i) {
-      Particle & p = pythia.event[i];
-      if ( p.isFinal() ) {
-        double eta = p.eta();
-        if ( p.isCharged() && p.pT() > 0.1 && eta < -2.09 && eta > -3.84 )
-          trigfwd = true;
-        if ( p.isCharged() && p.pT() > 0.1 && eta > 2.09 && eta < 3.84 )
-          trigbwd = true;
-        if ( p.pT() > 0.1 && eta < -3.2 && eta > -4.9 )
-          etfwd += p.eT();
-      }
-    }
-    // Skip if not triggered
-    if ( !(trigfwd && trigbwd) ) continue;
-
-    // Keep track of the sum of waights
-    double weight = pythia.info.weight();
-    sumw += weight;
-
-    // Histogram and save the summed Et.
-    sumet.fill(etfwd, weight);
-    gencent.insert(make_pair(etfwd, weight));
-    // Also fill the number of (absorptively and diffractively)
-    // wounded nucleaons.
-    int nw = pythia.info.hiinfo->nAbsTarg() +
-             pythia.info.hiinfo->nDiffTarg();
-    wounded.fill(nw, weight);
-
-    // Find the correct centrality histograms.
-    MapIdx::iterator expit =  expetaidx.upper_bound(etfwd);
-    int expidx = expit== expetaidx.end()? -1: expit->second;
-    MapIdx::iterator genit = genetaidx.upper_bound(etfwd);
-    int genidx = genit== genetaidx.end()? -1: genit->second;
-
-    // Sum the weights in the centrality classes, skip if not in a class.
-    if ( expidx < 0 && genidx < 0 ) continue;
-    if ( expidx >= 0 ) expsumw[expidx] += weight;
-    if ( genidx >= 0 ) gensumw[genidx] += weight;
-
-    // Go through the event again and fill the eta distributions.
-    for (int i = 0; i < pythia.event.size(); ++i) {
-      Particle & p = pythia.event[i];
-      if ( p.isFinal() && p.isCharged() &&
-           abs(p.eta()) < 2.7 && p.pT() > 0.1 ) {
-        if ( expidx >= 0 ) expetadist[expidx]->fill(p.eta(), weight);
-        if ( genidx >= 0 ) genetadist[genidx]->fill(p.eta(), weight);
-      }
-    }
-
 //=============================================================================
 
     for (auto i=0; i<pyReco.size(); ++i) {

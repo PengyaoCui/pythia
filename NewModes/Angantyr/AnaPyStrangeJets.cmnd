@@ -4,26 +4,16 @@ Beams:eA = 4000
 Beams:eB = 1570
 Beams:frameType = 2
 
+HeavyIon:mode = 1
+
 HeavyIon:SigFitErr = "
          "0.02,0.02,0.1,0.05,0.05,0.0,0.1,0.0
 HeavyIon:SigFitDefPar = "
          "17.24,2.15,0.33,0.0,0.0,0.0,0.0,0.0
 HeavyIon:SigFitNGen = 20
 
-//Main:numberOfEvents = 1001
-//SoftQCD:all = on
-//
-//MultiPartonInteractions:pT0Ref = 2.15
-//BeamRemnants:remnantMode = 1
-//BeamRemnants:saturation = 5
-//ColourReconnection:reconnect = on
-//ColourReconnection:mode = 1
-//ColourReconnection:allowDoubleJunRem = off
-//ColourReconnection:m0 = 0.3
-//ColourReconnection:allowJunctions = on
-//ColourReconnection:junctionCorrection = 1.2
-//ColourReconnection:timeDilationMode = 2
-//ColourReconnection:timeDilationPar = 0.18
+Main:numberOfEvents = 1001
+SoftQCD:all = on
 
 //Ropewalk:RopeHadronization = on
 //Ropewalk:doShoving = on
