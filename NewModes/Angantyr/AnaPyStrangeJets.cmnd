@@ -12,24 +12,6 @@ HeavyIon:SigFitDefPar = "
          "17.24,2.15,0.33,0.0,0.0,0.0,0.0,0.0
 HeavyIon:SigFitNGen = 20
 
-Main:numberOfEvents = 1001
+Main:numberOfEvents = 50001
 SoftQCD:all = on
 
-//Ropewalk:RopeHadronization = on
-//Ropewalk:doShoving = on
-//Ropewalk:tInit = 1.5 # Propagation time
-//Ropewalk:deltat = 0.05
-//Ropewalk:tShove = 0.1
-//Ropewalk:gAmplitude = 0. # Set shoving strength to 0 explicitly
-//
-//Ropewalk:doFlavour = on
-//Ropewalk:r0 = 0.5
-//Ropewalk:m0 = 0.2
-//Ropewalk:beta = 0.1
-
-!// Enabling setting of vertex information.
-//PartonVertex:setVertex = on
-//PartonVertex:protonRadius = 0.7
-//PartonVertex:emissionWidth = 0.1
-
-                                                        

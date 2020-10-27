@@ -15,6 +15,7 @@
 #include "TList.h"
 
 #include "TH1D.h"
+#include "TH2D.h"
 #include "TProfile.h"
 
 #include "Pythia8/Pythia.h"

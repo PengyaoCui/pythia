@@ -86,6 +86,9 @@ int main(int argc, char *argv[])
   auto hXsect (new TProfile("hXsect",  "", 1, 0., 1.));
   list_pyxsect->Add(hXsect);
 
+  auto hFwdChCent(new TH2D("hFwdChCent", "", 200, 0., 200., 500, 400., 900.));
+  list_pyxsect->Add(hFwdChCent);
+  
   auto list_results(new TList());
   auto hPtHat(new TH1D("hPtHat", "", 1000, 0., 1000.));
   list_results->Add(hPtHat);
@@ -120,7 +123,7 @@ int main(int argc, char *argv[])
     vConstis.resize(0);
     vStrgs.resize(0);
 //=============================================================================
-
+    auto dEtaFwd(0.);
     for (auto i=0; i<pyReco.size(); ++i) {
       const auto &ap(pyReco[i]);
       const auto dpPt(ap.pT()), dpEta(ap.eta());
@@ -132,6 +135,11 @@ int main(int argc, char *argv[])
         vConstis.emplace_back(ap.px(),ap.py(),ap.pz(),ap.p().pAbs());
         vConstis.back().set_user_index(i);
         hConsti->Fill(dpPt);
+      }
+      
+      if (ap.isFinal()       &&
+         (dpPt>dConstiPtMin) && (dpEta < -3.2)  && (dpEta>-4.9)) {
+          dEtaFwd += ap.eT();
       }
 //=============================================================================
 
@@ -238,6 +246,9 @@ int main(int argc, char *argv[])
 //=============================================================================
 
     hPtHat->Fill(pyInfo.pTHat());
+    hFwdChCent->Fill(dEtaFwd, pyInfo.weight());
+    //hFwdChCent->Fill(dEtaFwd);
+     
   }
 
   timer.Stop();
