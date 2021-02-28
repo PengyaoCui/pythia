@@ -72,7 +72,7 @@ aParser.add_argument('--nevs',
   metavar = 'ne')
 
 aParser.add_argument('--ecms',
-  default = 7000., type = float,
+  default = 13000., type = float,
   choices = [ 2760., 5020., 5440., 8000., 8160., 13000. ],
   help    = '''collision energy in cms frame in GeV
   default = %(default)s

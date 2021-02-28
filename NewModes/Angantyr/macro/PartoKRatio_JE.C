@@ -3,8 +3,8 @@
 void PartoKRatio_JE(){
 
 
-  TString sPath = "../pp13TeV";
-  TString sFile = "AnalysisResults_merged.root";
+  TString sPath = "../pPb5d02TeV";
+  TString sFile = "AnalysisResults_pPb.root";
   TString sList = "list_results";
   
   TString sKJC = "hKshort_Jet10_C04";
@@ -26,7 +26,7 @@ void PartoKRatio_JE(){
   TLatex* tex = nullptr;
   TLegend *leg = nullptr;
 
-  TFile *f = TFile::Open("./result/ParToKRatio_PYTHIA_pp.root", "UPDATE");
+  TFile *f = TFile::Open("./result/ParToKRatio_PYTHIA_pPb.root", "UPDATE");
   can = MakeCanvas("can");
 
   leg = new TLegend(0.7,0.9,1.0,0.7); SetLegend(leg);

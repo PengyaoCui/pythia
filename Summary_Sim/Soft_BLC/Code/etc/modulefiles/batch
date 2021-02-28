@@ -1,0 +1,16 @@
+#%Module1.0#####################################################################
+##
+## batch modulefile
+##
+proc ModulesHelp { } {
+    puts stderr "\tThis module file will add \$WORKDIR/modulefiles to the"
+    puts stderr "\tlist of directories that the module command will search"
+    puts stderr "\tfor modules.  Place your own module files here."
+}
+
+module-whatis "adds your own modulefiles directory to MODULEPATH"
+
+#odule use --append $::env(HOME)/local/etc/modulefiles
+module load pythia
+
+append-path PATH bin

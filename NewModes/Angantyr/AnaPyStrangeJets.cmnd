@@ -12,6 +12,6 @@ HeavyIon:SigFitDefPar = "
          "17.24,2.15,0.33,0.0,0.0,0.0,0.0,0.0
 HeavyIon:SigFitNGen = 20
 
-Main:numberOfEvents = 50001
+Main:numberOfEvents = 100001
 SoftQCD:all = on
 

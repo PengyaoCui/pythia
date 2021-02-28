@@ -45,7 +45,8 @@ void JE_XKRatio_pPb(){
   TString stny("Ratio: (#Xi^{-} + #bar{#Xi}^{+}) / 2K_{S}^{0}");
   
   SetStyle(kTRUE);
-  
+  gStyle->SetErrorX(0);
+
   auto can(MakeCanvas(Form("Ratio_XK")));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm, stnx, stny, dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
@@ -123,6 +124,7 @@ void JE_XLRatio_pPb(){
   TString stny("Ratio: (#Xi^{-} + #bar{#Xi}^{+}) / #Lambda + #bar{#Lambda}");
 
   SetStyle(kTRUE);
+  gStyle->SetErrorX(0);
 
   auto can(MakeCanvas(Form("Ratio_XL")));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));

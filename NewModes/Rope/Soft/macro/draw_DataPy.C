@@ -69,6 +69,7 @@ void draw_DataPy(const TString sType = "Xi"){
   gStyle->SetOptStat("");
  
   can->SaveAs(Form("./figure/%s_toKRatio_DataPy_Rope_hQCD.eps", sType.Data()));
+  can->SaveAs(Form("./figure/%s_toKRatio_DataPy_Rope_hQCD.pdf", sType.Data()));
   can->SaveAs(Form("./figure/%s_toKRatio_DataPy_Rope_hQCD.png", sType.Data()));
   CanvasEnd(can);
   

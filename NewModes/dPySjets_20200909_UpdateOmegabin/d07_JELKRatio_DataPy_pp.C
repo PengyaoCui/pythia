@@ -30,6 +30,7 @@ void d07_JELKRatio_DataPy_pp(){
   TString stny("Ratio: (#Lambda + #bar{#Lambda}) / 2K_{S}^{0}");
   
   SetStyle(kTRUE);
+  gStyle->SetErrorX(0); 
 
   auto can(MakeCanvas(Form("Ratio_PyData")));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));
@@ -37,7 +38,7 @@ void d07_JELKRatio_DataPy_pp(){
   hfm->GetXaxis()->SetNdivisions(510);
   hfm->GetYaxis()->SetNdivisions(510);
 
-  DrawHisto(h, wcl[0], wmk[0], "same"); DrawGraph(gE, wcl[0], "E2");
+  DrawHisto(h, wcl[1], wmk[0], "same"); DrawGraph(gE, wcl[1], "E2");
   
   DrawGraph(g[1],  wcl[0], "C");
   DrawGraph(g[0],  wcl[1], "C");

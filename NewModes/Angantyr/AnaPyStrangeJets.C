@@ -86,8 +86,10 @@ int main(int argc, char *argv[])
   auto hXsect (new TProfile("hXsect",  "", 1, 0., 1.));
   list_pyxsect->Add(hXsect);
 
-  auto hFwdChCent(new TH2D("hFwdChCent", "", 200, 0., 200., 500, 400., 900.));
-  list_pyxsect->Add(hFwdChCent);
+  auto hFwdChWeight(new TH2D("hFwdChWeight", "", 1000, 0., 1000., 500, 400., 900.));
+  list_pyxsect->Add(hFwdChWeight);
+  auto hFwdCh(new TH1D("hFwdCh", "", 1000, 0., 1000.));
+  list_pyxsect->Add(hFwdCh);
   
   auto list_results(new TList());
   auto hPtHat(new TH1D("hPtHat", "", 1000, 0., 1000.));
@@ -124,6 +126,7 @@ int main(int argc, char *argv[])
     vStrgs.resize(0);
 //=============================================================================
     auto dEtaFwd(0.);
+    auto dFwd(0.);
     for (auto i=0; i<pyReco.size(); ++i) {
       const auto &ap(pyReco[i]);
       const auto dpPt(ap.pT()), dpEta(ap.eta());
@@ -138,8 +141,9 @@ int main(int argc, char *argv[])
       }
       
       if (ap.isFinal()       &&
-         (dpPt>dConstiPtMin) && (dpEta < -3.2)  && (dpEta>-4.9)) {
+         (dpPt>dConstiPtMin) && (dpEta > 2.8)  && (dpEta<5.1)) {
           dEtaFwd += ap.eT();
+          dFwd += 1.;
       }
 //=============================================================================
 
@@ -246,8 +250,8 @@ int main(int argc, char *argv[])
 //=============================================================================
 
     hPtHat->Fill(pyInfo.pTHat());
-    hFwdChCent->Fill(dEtaFwd, pyInfo.weight());
-    //hFwdChCent->Fill(dEtaFwd);
+    hFwdChWeight->Fill(dEtaFwd, pyInfo.weight());
+    hFwdCh->Fill(dFwd);
      
   }
 

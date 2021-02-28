@@ -20,11 +20,11 @@ root -l -b -q ./d17_LKDoubleRatio_pPb.C
 root -l -b -q ./d18_PyDataDoubleRatio_LK_pPb.C
 root -l -b -q ./d19_JE_XPRatio_DataPy_pPb.C
 root -l -b -q ./d20_XKDoubleRatio_pPb.C
-root -l -b -q ./d21_Spectpp_w3UE.C
+#root -l -b -q ./d21_Spectpp_w3UE.C
 root -l -b -q ./d22_Spectpp_woUE.C
 root -l -b -q ./d23_JESpectpp_py.C
 root -l -b -q ./d24_InclJELKRatio_DataPy_pp.C
-root -l -b -q ./d25_SpectpPb_w3UE_MB.C
+#root -l -b -q ./d25_SpectpPb_w3UE_MB.C
 root -l -b -q ./d26_SpectpPb_woUE_MB.C
 root -l -b -q ./d27_JESpectpPb_DataPy.C
 root -l -b -q ./d28_JEParRatio_pp_pPb.C

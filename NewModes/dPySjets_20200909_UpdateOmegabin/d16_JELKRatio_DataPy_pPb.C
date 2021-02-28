@@ -37,7 +37,8 @@ void d16_JELKRatio_DataPy_pPb(){
   TString stny("Ratio: (#Lambda + #bar{#Lambda}) / 2K_{S}^{0}");
   
   SetStyle(kTRUE);
-  
+  gStyle->SetErrorX(0);
+
   auto can(MakeCanvas(Form("Ratio")));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm, stnx, stny, dlsx, dlsy, dtsx, dtsy, dtox, dtoy);

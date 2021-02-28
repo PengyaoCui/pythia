@@ -48,6 +48,7 @@ void JEPKRatio_DataPy_pp(TString sType = "Xi"){
   }
   
   SetStyle(kTRUE);
+  gStyle->SetErrorX(0);
 
   auto can(MakeCanvas(Form("%s_toKRatio_PyData", sType.Data())));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));
@@ -55,7 +56,7 @@ void JEPKRatio_DataPy_pp(TString sType = "Xi"){
   hfm->GetXaxis()->SetNdivisions(510);
   hfm->GetYaxis()->SetNdivisions(510);
 
-  DrawHisto(h, wcl[0], wmk[0], "same"); DrawGraph(gE, wcl[0], "E2");
+  DrawHisto(h, wcl[1], wmk[0], "same"); DrawGraph(gE, wcl[1], "E2");
   
   DrawGraph(g[1],  wcl[0], "C");
   DrawGraph(g[0],  wcl[1], "C");
@@ -132,13 +133,14 @@ void JEPLRatio_DataPy_pp(TString sType = "Xi"){
   }
   
   SetStyle(kTRUE);
+  gStyle->SetErrorX(0);
   auto can(MakeCanvas(Form("%s_toLRatio_PyData", sType.Data())));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm, stnx, stny, dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm->GetXaxis()->SetNdivisions(510);
   hfm->GetYaxis()->SetNdivisions(510);
 
-  DrawHisto(h, wcl[0], wmk[0], "same"); DrawGraph(gE, wcl[0], "E2");
+  DrawHisto(h, wcl[1], wmk[0], "same"); DrawGraph(gE, wcl[1], "E2");
   
   DrawGraph(g[1],  wcl[0], "C");
   DrawGraph(g[0],  wcl[1], "C");
@@ -200,13 +202,14 @@ void JEPXRatio_DataPy_pp(TString sType = "Omega"){
   TString stny("Ratio: (#Omega^{+} + #bar{#Omega}^{-}) / #Xi^{-} + #bar{#Xi}^{+}");
 
   SetStyle(kTRUE);
+  gStyle->SetErrorX(0);
   auto can(MakeCanvas(Form("%s_toXRatio_PyData", sType.Data())));
   auto hfm(can->DrawFrame(dflx, dfly, dfux, dfuy));
   SetupFrame(hfm, stnx, stny, dlsx, dlsy, dtsx, dtsy, dtox, dtoy);
   hfm->GetXaxis()->SetNdivisions(510);
   hfm->GetYaxis()->SetNdivisions(510);
 
-  DrawHisto(h, wcl[0], wmk[0], "same"); DrawGraph(gE, wcl[0], "E2");
+  DrawHisto(h, wcl[1], wmk[0], "same"); DrawGraph(gE, wcl[1], "E2");
   
   DrawGraph(g[1],  wcl[0], "C");
   DrawGraph(g[0],  wcl[1], "C");
