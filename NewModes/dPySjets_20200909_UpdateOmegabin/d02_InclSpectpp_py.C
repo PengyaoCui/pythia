@@ -1,7 +1,5 @@
 #include "inc/PyJetUtils.h"
 
-
-
 void InclSpectpp_py(TString sType = "Kshort");
 void d02_InclSpectpp_py(){
   InclSpectpp_py("Kshort");

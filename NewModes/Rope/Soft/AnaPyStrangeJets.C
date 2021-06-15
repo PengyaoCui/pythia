@@ -89,7 +89,13 @@ int main(int argc, char *argv[])
   auto list_results(new TList());
   auto hPtHat(new TH1D("hPtHat", "", 1000, 0., 1000.));
   list_results->Add(hPtHat);
+  
+  auto hJEvent(new TH1D("hJEvent", "", 10, 0., 10.));
+  list_results->Add(hJEvent);
 
+  //auto hJCSize(new TH1D("hJCSize", "", 10, 0., 10.));
+  //list_results->Add(hJCSize);
+  
   auto hJet(new TH1D("hJet", "", 500, 0., 500.));
   list_results->Add(hJet);
 
@@ -184,6 +190,7 @@ int main(int argc, char *argv[])
     for (const auto &aj : vJets) if (aj.area()>dJetAreaMin) hJet->Fill(aj.pt());
 //=============================================================================
 
+    bool IsJet(kFALSE);
     for (const auto &av : vStrgs) {
       auto ps(av.user_info_shared_ptr());
       const auto ks((static_cast<StrgInfo*>(ps.get()))->GetType());
@@ -203,6 +210,8 @@ int main(int argc, char *argv[])
         for (const auto &aj : vJets) if (aj.area()>dJetAreaMin) {
           const auto dj(aj.pt());
           if (dj<dJetPtCut) continue;
+          IsJet = kTRUE;
+
           vj.SetPtEtaPhi(dj, aj.eta(), aj.phi());
           vl1.SetPtEtaPhi(dj, aj.eta(), aj.phi()); vl1.RotateZ(TMath::PiOver2());
           vl2.SetPtEtaPhi(dj, aj.eta(), aj.phi()); vl2.RotateZ(-1.*TMath::PiOver2());
@@ -237,6 +246,8 @@ int main(int argc, char *argv[])
     }
 //=============================================================================
 
+
+    if(IsJet){hJEvent->Fill(1);}
     hPtHat->Fill(pyInfo.pTHat());
   }
 
