@@ -1,0 +1,25 @@
+executable = bin/runAnaPyStrangeJets
+
+input  = cfg/AnaPyStrangeJets.cmnd
+log    = log/AnaPyStrangeJets_$(ClusterId)_$(ProcId).log
+output = log/AnaPyStrangeJets_$(ClusterId)_$(ProcId).out
+error  = log/AnaPyStrangeJets_$(ClusterId)_$(ProcId).err
+
++JobFlavour = "longlunch"
+arguments   = $(ClusterId) $(ProcId)
+transfer_output_files = AnalysisResults_$(ClusterId)_$(ProcId).root
+
+initialdir = /home/cuipengyao/study/pythia/NewModes/Rope/Hard/local/run/dPtHat_005_011
+queue 100
+
+initialdir = /home/cuipengyao/study/pythia/NewModes/Rope/Hard/local/run/dPtHat_011_021
+queue 100
+
+initialdir = /home/cuipengyao/study/pythia/NewModes/Rope/Hard/local/run/dPtHat_021_036
+queue 100
+
+initialdir = /home/cuipengyao/study/pythia/NewModes/Rope/Hard/local/run/dPtHat_036_057
+queue 100
+
+initialdir = /home/cuipengyao/study/pythia/NewModes/Rope/Hard/local/run/dPtHat_057_INF
+queue 100

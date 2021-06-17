@@ -47,7 +47,8 @@ void JESpectpp_py(TString sType = "Kshort"){
                             rh[0]->Add(hA);}
   if(sType == "Xi"){rh[0] = (TH1D*)rl->FindObject(Form("hXiNeg_Jet10_C04"));
                             auto hA = (TH1D*)rl->FindObject(Form("hXiPos_Jet10_C04"));
-                            rh[0]->Add(hA);}
+                            rh[0]->Add(hA);
+			    rh[0]->Rebin(2);}
   if(sType == "Omega"){rh[0] = (TH1D*)rl->FindObject(Form("hOmegaNeg_Jet10_C04"));
                             auto hA = (TH1D*)rl->FindObject(Form("hOmegaPos_Jet10_C04"));
                             rh[0]->Add(hA);
@@ -57,7 +58,7 @@ void JESpectpp_py(TString sType = "Kshort"){
   rh[0]->Rebin(5);
   NormBinningHistogram(rh[0]);
 
-  auto hf = TFile::Open("./data/Rope/Hard.root", "read");
+  auto hf = TFile::Open("./data/Rope/Hard_J.root", "read");
   auto hl = (TList*)hf->Get(Form("list_results"));
   hf->Close();
   rh[1] = (TH1D*)hl->FindObject(Form("h%s_Jet10_C04", sType.Data()));
@@ -66,7 +67,8 @@ void JESpectpp_py(TString sType = "Kshort"){
                             rh[1]->Add(hA);}
   if(sType == "Xi"){rh[1] = (TH1D*)hl->FindObject(Form("hXiNeg_Jet10_C04"));
                             auto hA = (TH1D*)hl->FindObject(Form("hXiPos_Jet10_C04"));
-                            rh[1]->Add(hA);}
+                            rh[1]->Add(hA);
+			    rh[0]->Rebin(2);}
   if(sType == "Omega"){rh[1] = (TH1D*)hl->FindObject(Form("hOmegaNeg_Jet10_C04"));
                             auto hA = (TH1D*)hl->FindObject(Form("hOmegaPos_Jet10_C04"));
                             rh[1]->Add(hA);
@@ -74,7 +76,7 @@ void JESpectpp_py(TString sType = "Kshort"){
   //rh[1]->Scale(1./(2.*0.75*TMath::TwoPi()*70.));
   rh[1]->Rebin(5);
   
-  rh[1]->Scale(1./(137565.*0.06*0.75*TMath::TwoPi()));
+  rh[1]->Scale(1./(70.*0.06*0.75*TMath::TwoPi()));
   NormBinningHistogram(rh[1]);
 
   g[nm] = new TGraph(rh[0]);
@@ -101,7 +103,7 @@ void JESpectpp_py(TString sType = "Kshort"){
   if(sType == "Xi"){
     dfux = 8.;
     dfly = 1e-4;
-    dfuy = 1e-1;
+    dfuy = 1e-0;
     stny = "d#it{#rho}/d#it{p}_{T}: #Xi^{-} + #bar{#Xi}^{+}";
   }
   if(sType == "Omega"){
@@ -122,12 +124,12 @@ void JESpectpp_py(TString sType = "Kshort"){
 
   DrawHisto(h, wcl[0], wmk[0], "same"); DrawGraph(gE, wcl[0], "E2");
   
-  DrawGraph(g[1],  wcl[0], "C");
-  DrawGraph(g[0],  wcl[1], "C");
-  //DrawGraph(g[2],  wcl[2], "C");
-  //DrawGraph(g[3],  wcl[3], "C");
-  DrawGraph(g[4],  wcl[4], "C");
-  DrawGraph(g[5],  wcl[5], "C");
+  DrawGraph(g[1],  wcl[0], "L");
+  DrawGraph(g[0],  wcl[1], "L");
+  //DrawGraph(g[2],  wcl[2], "L");
+  //DrawGraph(g[3],  wcl[3], "L");
+  DrawGraph(g[4],  wcl[4], "L");
+  DrawGraph(g[5],  wcl[5], "L");
 
   auto leg(new TLegend(0.52, 0.60, 0.98, 0.92)); SetupLegend(leg);
   leg->AddEntry(h, "Data", "LP")->SetTextSizePixels(24);
