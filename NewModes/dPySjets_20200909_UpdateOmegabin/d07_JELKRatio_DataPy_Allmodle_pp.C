@@ -14,21 +14,43 @@ void d07_JELKRatio_DataPy_Allmodle_pp(){
                                     //               with rapidity shift
 				    //               used to fit p-Pb acceptance
 
-  TGraph *g[nm+1];
+  TGraph *g[nm+2];
   for (auto i=0; i<nm; ++i) g[i] = new TGraph(RatioLK(i, sd, sj, "JC04", "PC04"));
   //for (auto i=0; i<nm; ++i) for (auto j=0; j<4; ++j) g[j][i]->SetLineStyle(9);
   auto rf = TFile::Open("./data/Rope/Hard_J.root", "read");
   auto rl = (TList*)rf->Get(Form("list_results"));
   rf->Close();
+
+  const Double_t dPtBin[] = { 0.6, 1.6, 2.2, 2.8, 3.7, 5.0, 8.0, 12., 15. };
+  const auto nPtBin(sizeof(dPtBin) / sizeof(Double_t) - 1);
+
   TH1D* rh[2];
-  rh[0] = (TH1D*)rl->FindObject(Form("hKshort_Jet10_C04")); rh[0]->Scale(2.);rh[0]->Rebin(15);
+  rh[0] = (TH1D*)rl->FindObject(Form("hKshort_Jet10_C04")); rh[0]->Scale(2.); auto hK(rh[0]->Rebin(nPtBin, "rh0", dPtBin));
   rh[1] = (TH1D*)rl->FindObject(Form("hLambda_Jet10_C04"));
   auto hA = (TH1D*)rl->FindObject(Form("hAntiLa_Jet10_C04"));
   rh[1]->Add(hA);
-  rh[1]->Rebin(15);
+  
+  //rh[1]->Rebin(5);
+  auto hL(rh[1]->Rebin(nPtBin, "rh1", dPtBin));
 
-  rh[1]->Divide(rh[0]);
-  g[nm]= new TGraph(rh[1]);
+  hL->Divide(hK);
+  //rh[1]->Divide(rh[0]);
+  auto rF = TFile::Open("./data/Rope/Soft.root", "read");
+  auto rL = (TList*)rF->Get(Form("list_results"));
+  rF->Close();
+  
+  TH1D* rH[2];
+  rH[0] = (TH1D*)rL->FindObject(Form("hKshort_Jet10_C04")); rH[0]->Scale(2.); auto hk(rH[0]->Rebin(nPtBin, "rH0", dPtBin));
+  rH[1] = (TH1D*)rL->FindObject(Form("hLambda_Jet10_C04"));
+  auto ha = (TH1D*)rL->FindObject(Form("hAntiLa_Jet10_C04"));
+  rH[1]->Add(ha);
+  
+  auto hl(rH[1]->Rebin(nPtBin, "rH1", dPtBin));
+  hl->Divide(hk);
+
+
+  g[nm]= new TGraph(hl);
+  g[nm+1]= new TGraph(hL);
 
 //=============================================================================
   auto dflx(0.), dfux(12.);
@@ -57,6 +79,7 @@ void d07_JELKRatio_DataPy_Allmodle_pp(){
   //DrawGraph(g[2],  wcl[2], "C");
   //DrawGraph(g[3],  wcl[3], "C");
   DrawGraph(g[4],  wcl[4], "C");
+  DrawGraph(g[5],  wcl[5], "C");
 
   auto leg(new TLegend(0.52, 0.60, 0.98, 0.92)); SetupLegend(leg);
   leg->AddEntry(h, "Data", "LP")->SetTextSizePixels(24);
@@ -64,7 +87,8 @@ void d07_JELKRatio_DataPy_Allmodle_pp(){
   leg->AddEntry(g[0], "BLC mode 0", "L")->SetTextSizePixels(24);
   //leg->AddEntry(g[2], "mode 2", "L")->SetTextSizePixels(24);
   //leg->AddEntry(g[3], "mode 3", "L")->SetTextSizePixels(24);
-  leg->AddEntry(g[4], "Rope w/ hard QCD", "L")->SetTextSizePixels(24);
+  leg->AddEntry(g[4], "Rope w/ soft QCD", "L")->SetTextSizePixels(24);
+  leg->AddEntry(g[5], "Rope w/ hard QCD", "L")->SetTextSizePixels(24);
   leg->Draw();
   //leg->AddEntry(gE[0], "Sys. Error", "f")->SetTextSizePixels(24);
 

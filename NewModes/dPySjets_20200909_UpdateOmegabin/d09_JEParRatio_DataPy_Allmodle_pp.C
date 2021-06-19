@@ -25,30 +25,68 @@ void JEPKRatio_DataPy_pp(TString sType = "Xi"){
                                     //               with rapidity shift
 				    //               used to fit p-Pb acceptance
 
-  TGraph *g[nm+1];
+  TGraph *g[nm+2];
   if(sType == "Xi"){for (auto i=0; i<nm; ++i) g[i] = new TGraph(RatioXK(i, sd, sj, "JC04", "PC04"));}
   if(sType == "Omega"){for (auto i=0; i<nm; ++i) g[i] = new TGraph(RatioOK(i, sd, sj, "JC04", "PC04"));}
 
   //for (auto i=0; i<nm; ++i) for (auto j=0; j<4; ++j) g[j][i]->SetLineStyle(9);
+
+//=============================================================================
+  const Double_t dPtBin[] = { 0.6, 1.6, 2.2, 2.8, 3.7, 5.0, 8.0, 12., 15. };
+  const auto nPtBin(sizeof(dPtBin) / sizeof(Double_t) - 1);
+
   auto rf = TFile::Open("./data/Rope/Hard_J.root", "read");
   auto rl = (TList*)rf->Get(Form("list_results"));
   rf->Close();
-  TH1D* rh[2];
-  rh[0] = (TH1D*)rl->FindObject(Form("hKshort_Jet10_C04")); rh[0]->Scale(2.);rh[0]->Rebin(5);
-  if(sType == "Lambda_sum"){rh[1] = (TH1D*)rl->FindObject(Form("hLambda_Jet10_C04"));
-                            auto hA = (TH1D*)rl->FindObject(Form("hAntiLa_Jet10_C04"));
-                            rh[1]->Add(hA);}
-  if(sType == "Xi"){rh[1] = (TH1D*)rl->FindObject(Form("hXiNeg_Jet10_C04"));
-                            auto hA = (TH1D*)rl->FindObject(Form("hXiPos_Jet10_C04"));
-                            rh[1]->Add(hA);}
-  if(sType == "Omega"){rh[1] = (TH1D*)rl->FindObject(Form("hOmegaNeg_Jet10_C04"));
-                            auto hA = (TH1D*)rl->FindObject(Form("hOmegaPos_Jet10_C04"));
-                            rh[1]->Add(hA); }
-  rh[1]->Rebin(5);
+  TH1D* rh[2]; TH1D* hh[2];
+  rh[0] = (TH1D*)rl->FindObject(Form("hKshort_Jet10_C04")); rh[0]->Scale(2.);
+  hh[0]=(TH1D*)rh[0]->Rebin(nPtBin, "hh", dPtBin);
+  if(sType == "Lambda_sum"){
+    rh[1] = (TH1D*)rl->FindObject(Form("hLambda_Jet10_C04"));
+    auto ha = (TH1D*)rl->FindObject(Form("hAntiLa_Jet10_C04"));
+    rh[1]->Add(ha);
+  }
+  if(sType == "Xi"){
+    rh[1] = (TH1D*)rl->FindObject(Form("hXiNeg_Jet10_C04"));
+    auto ha = (TH1D*)rl->FindObject(Form("hXiPos_Jet10_C04"));
+    rh[1]->Add(ha);
+  }
+  if(sType == "Omega"){
+    rh[1] = (TH1D*)rl->FindObject(Form("hOmegaNeg_Jet10_C04"));
+    auto ha = (TH1D*)rl->FindObject(Form("hOmegaPos_Jet10_C04"));
+    rh[1]->Add(ha);
+  }
+  hh[1]=(TH1D*)rh[1]->Rebin(nPtBin, "h1", dPtBin);
 
-  rh[1]->Divide(rh[0]);
-  g[nm]= new TGraph(rh[1]);
+  hh[1]->Divide(hh[0]);
+  g[nm]= new TGraph(hh[1]);
 
+  auto rF = TFile::Open("./data/Rope/Soft.root", "read");
+  auto rL = (TList*)rF->Get(Form("list_results"));
+  rF->Close();
+  TH1D* rH[2]; TH1D* H[2];
+  rH[0] = (TH1D*)rL->FindObject(Form("hKshort_Jet10_C04")); rH[0]->Scale(2.);
+  H[0]=(TH1D*)rH[0]->Rebin(nPtBin, "H", dPtBin);
+  if(sType == "Lambda_sum"){
+    rH[1] = (TH1D*)rL->FindObject(Form("hLambda_Jet10_C04"));
+    auto haa = (TH1D*)rL->FindObject(Form("hAntiLa_Jet10_C04"));
+    rH[1]->Add(haa);
+  }
+  if(sType == "Xi"){
+    rH[1] = (TH1D*)rL->FindObject(Form("hXiNeg_Jet10_C04"));
+    auto haa = (TH1D*)rL->FindObject(Form("hXiPos_Jet10_C04"));
+    rH[1]->Add(haa);
+  }
+  if(sType == "Omega"){
+    rH[1] = (TH1D*)rL->FindObject(Form("hOmegaNeg_Jet10_C04"));
+    auto haa = (TH1D*)rL->FindObject(Form("hOmegaPos_Jet10_C04"));
+    rH[1]->Add(haa);
+  }
+  H[1]=(TH1D*)rH[1]->Rebin(nPtBin, "H1", dPtBin);
+
+  H[1]->Divide(H[0]);
+  g[nm+1]= new TGraph(hh[1]);
+  g[nm]= new TGraph(H[1]);
 
 //=============================================================================
   auto dflx(0.), dfux(8.);
@@ -78,11 +116,12 @@ void JEPKRatio_DataPy_pp(TString sType = "Xi"){
 
   DrawHisto(h, wcl[1], wmk[0], "same"); DrawGraph(gE, wcl[1], "E2");
   
-  DrawGraph(g[1],  wcl[0], "L");
-  DrawGraph(g[0],  wcl[1], "L");
-  //DrawGraph(g[2],  wcl[2], "L");
-  //DrawGraph(g[3],  wcl[3], "L");
-  DrawGraph(g[4],  wcl[4], "L");
+  DrawGraph(g[1],  wcl[0], "C");
+  DrawGraph(g[0],  wcl[1], "C");
+  //DrawGraph(g[2],  wcl[2], "C");
+  //DrawGraph(g[3],  wcl[3], "C");
+  DrawGraph(g[4],  wcl[4], "C");
+  DrawGraph(g[5],  wcl[5], "C");
 
   auto leg(new TLegend(0.52, 0.60, 0.98, 0.92)); SetupLegend(leg);
   leg->AddEntry(h, "Data", "LP")->SetTextSizePixels(24);
@@ -90,7 +129,8 @@ void JEPKRatio_DataPy_pp(TString sType = "Xi"){
   leg->AddEntry(g[0], "BLC mode 0", "L")->SetTextSizePixels(24);
   //leg->AddEntry(g[2], "mode 2", "L")->SetTextSizePixels(24);
   //leg->AddEntry(g[3], "mode 3", "L")->SetTextSizePixels(24);
-  leg->AddEntry(g[4], "Rope w/ hard QCD", "L")->SetTextSizePixels(24);
+  leg->AddEntry(g[4], "Rope w/ soft QCD", "L")->SetTextSizePixels(24);
+  leg->AddEntry(g[5], "Rope w/ hard QCD", "L")->SetTextSizePixels(24);
   leg->Draw();
   //leg->AddEntry(gE[0], "Sys. Error", "f")->SetTextSizePixels(24);
 
@@ -123,7 +163,7 @@ void JEPLRatio_DataPy_pp(TString sType = "Xi"){
                                     //               with rapidity shift
 				    //               used to fit p-Pb acceptance
 
-  TGraph *g[nm+1];
+  TGraph *g[nm+2];
   if(sType == "Xi"){
     for (auto i=0; i<nm; ++i){
       g[i] = new TGraph(RatioXL(i, sd, sj, "JC04", "PC04"));
@@ -137,24 +177,60 @@ void JEPLRatio_DataPy_pp(TString sType = "Xi"){
   }
   //for (auto i=0; i<nm; ++i) for (auto j=0; j<4; ++j) g[j][i]->SetLineStyle(9);
   
+
+//=============================================================================
+  const Double_t dPtBin[] = { 0.6, 1.6, 2.2, 2.8, 3.7, 5.0, 8.0, 12., 15. };
+  const auto nPtBin(sizeof(dPtBin) / sizeof(Double_t) - 1);
+
   auto rf = TFile::Open("./data/Rope/Hard_J.root", "read");
   auto rl = (TList*)rf->Get(Form("list_results"));
   rf->Close();
-  TH1D* rh[2];
+  TH1D* rh[2]; TH1D* hh[2];
+
   rh[0] = (TH1D*)rl->FindObject(Form("hLambda_Jet10_C04"));
   auto hA = (TH1D*)rl->FindObject(Form("hAntiLa_Jet10_C04"));
   rh[0]->Add(hA);
-  rh[0]->Rebin(5);
-  if(sType == "Xi"){rh[1] = (TH1D*)rl->FindObject(Form("hXiNeg_Jet10_C04"));
-                            auto hA = (TH1D*)rl->FindObject(Form("hXiPos_Jet10_C04"));
-                            rh[1]->Add(hA);}
-  if(sType == "Omega"){rh[1] = (TH1D*)rl->FindObject(Form("hOmegaNeg_Jet10_C04"));
-                            auto hA = (TH1D*)rl->FindObject(Form("hOmegaPos_Jet10_C04"));
-                            rh[1]->Add(hA); }
-  rh[1]->Rebin(5);
+  hh[0]=(TH1D*)rh[0]->Rebin(nPtBin, "hh", dPtBin);
 
-  rh[1]->Divide(rh[0]);
-  g[nm]= new TGraph(rh[1]);
+  if(sType == "Xi"){
+    rh[1] = (TH1D*)rl->FindObject(Form("hXiNeg_Jet10_C04"));
+    auto ha = (TH1D*)rl->FindObject(Form("hXiPos_Jet10_C04"));
+    rh[1]->Add(ha);
+  }
+  if(sType == "Omega"){
+    rh[1] = (TH1D*)rl->FindObject(Form("hOmegaNeg_Jet10_C04"));
+    auto ha = (TH1D*)rl->FindObject(Form("hOmegaPos_Jet10_C04"));
+    rh[1]->Add(ha);
+  }
+  hh[1]=(TH1D*)rh[1]->Rebin(nPtBin, "h1", dPtBin);
+
+  hh[1]->Divide(hh[0]);
+  g[nm]= new TGraph(hh[1]);
+
+  auto rF = TFile::Open("./data/Rope/Soft.root", "read");
+  auto rL = (TList*)rF->Get(Form("list_results"));
+  rF->Close();
+  TH1D* rH[2]; TH1D* H[2];
+  rH[0] = (TH1D*)rL->FindObject(Form("hLambda_Jet10_C04"));
+  auto hAA = (TH1D*)rL->FindObject(Form("hAntiLa_Jet10_C04"));
+  rH[0]->Add(hAA);
+  H[0]=(TH1D*)rH[0]->Rebin(nPtBin, "H0", dPtBin);
+
+  if(sType == "Xi"){
+    rH[1] = (TH1D*)rL->FindObject(Form("hXiNeg_Jet10_C04"));
+    auto haa = (TH1D*)rL->FindObject(Form("hXiPos_Jet10_C04"));
+    rH[1]->Add(haa);
+  }
+  if(sType == "Omega"){
+    rH[1] = (TH1D*)rL->FindObject(Form("hOmegaNeg_Jet10_C04"));
+    auto haa = (TH1D*)rL->FindObject(Form("hOmegaPos_Jet10_C04"));
+    rH[1]->Add(haa);
+  }
+  H[1]=(TH1D*)rH[1]->Rebin(nPtBin, "H1", dPtBin);
+
+  H[1]->Divide(H[0]);
+  g[nm+1]= new TGraph(hh[1]);
+  g[nm]= new TGraph(H[1]);
 
 //=============================================================================
   auto dflx(0.), dfux(8.);
@@ -183,11 +259,12 @@ void JEPLRatio_DataPy_pp(TString sType = "Xi"){
 
   DrawHisto(h, wcl[1], wmk[0], "same"); DrawGraph(gE, wcl[1], "E2");
   
-  DrawGraph(g[1],  wcl[0], "L");
-  DrawGraph(g[0],  wcl[1], "L");
-  //DrawGraph(g[2],  wcl[2], "L");
-  //DrawGraph(g[3],  wcl[3], "L");
-  DrawGraph(g[4],  wcl[4], "L");
+  DrawGraph(g[1],  wcl[0], "C");
+  DrawGraph(g[0],  wcl[1], "C");
+  //DrawGraph(g[2],  wcl[2], "C");
+  //DrawGraph(g[3],  wcl[3], "C");
+  DrawGraph(g[4],  wcl[4], "C");
+  DrawGraph(g[5],  wcl[5], "C");
 
   auto leg(new TLegend(0.52, 0.60, 0.98, 0.92)); SetupLegend(leg);
   leg->AddEntry(h, "Data", "LP")->SetTextSizePixels(24);
@@ -195,7 +272,8 @@ void JEPLRatio_DataPy_pp(TString sType = "Xi"){
   leg->AddEntry(g[0], "BLC mode 0", "L")->SetTextSizePixels(24);
   //leg->AddEntry(g[2], "mode 2", "L")->SetTextSizePixels(24);
   //leg->AddEntry(g[3], "mode 3", "L")->SetTextSizePixels(24);
-  leg->AddEntry(g[4], "Rope w/ hard QCD", "L")->SetTextSizePixels(24);
+  leg->AddEntry(g[4], "Rope w/ soft QCD", "L")->SetTextSizePixels(24);
+  leg->AddEntry(g[5], "Rope w/ hard QCD", "L")->SetTextSizePixels(24);
   leg->Draw();
   //leg->AddEntry(gE[0], "Sys. Error", "f")->SetTextSizePixels(24);
 
@@ -228,26 +306,48 @@ void JEPXRatio_DataPy_pp(TString sType = "Omega"){
                                     //               with rapidity shift
 				    //               used to fit p-Pb acceptance
 
-  TGraph *g[nm+1];
+  TGraph *g[nm+2];
   for (auto i=0; i<nm; ++i) g[i] = new TGraph(RatioOX(i, sd, sj, "JC04", "PC04"));
   //for (auto i=0; i<nm; ++i) for (auto j=0; j<4; ++j) g[j][i]->SetLineStyle(9);
 
+  const Double_t dPtBin[] = { 0.6, 1.6, 2.2, 2.8, 3.7, 5.0, 8.0, 12., 15. };
+  const auto nPtBin(sizeof(dPtBin) / sizeof(Double_t) - 1);
+  
   auto rf = TFile::Open("./data/Rope/Hard_J.root", "read");
   auto rl = (TList*)rf->Get(Form("list_results"));
   rf->Close();
-  TH1D* rh[2];
+  TH1D* rh[2]; TH1D* hh[2];
   rh[0] = (TH1D*)rl->FindObject(Form("hXiNeg_Jet10_C04"));
   auto hA = (TH1D*)rl->FindObject(Form("hXiPos_Jet10_C04"));
   rh[0]->Add(hA);
-  rh[0]->Rebin(5);
-  
+  hh[0]=(TH1D*)rh[0]->Rebin(nPtBin, "hh", dPtBin);
+ 
   rh[1] = (TH1D*)rl->FindObject(Form("hOmegaNeg_Jet10_C04"));
   auto ha = (TH1D*)rl->FindObject(Form("hOmegaPos_Jet10_C04"));
   rh[1]->Add(ha); 
-  rh[1]->Rebin(5);
+  hh[1]=(TH1D*)rh[1]->Rebin(nPtBin, "h1", dPtBin);
 
-  rh[1]->Divide(rh[0]);
-  g[nm]= new TGraph(rh[1]);
+  hh[1]->Divide(hh[0]);
+  g[nm]= new TGraph(hh[1]);
+
+  auto rF = TFile::Open("./data/Rope/Soft.root", "read");
+  auto rL = (TList*)rF->Get(Form("list_results"));
+  rF->Close();
+  TH1D* rH[2]; TH1D* H[2];
+  rH[0] = (TH1D*)rL->FindObject(Form("hXiNeg_Jet10_C04"));
+  auto hAA = (TH1D*)rL->FindObject(Form("hXiPos_Jet10_C04"));
+  rH[0]->Add(hAA);
+  H[0]=(TH1D*)rH[0]->Rebin(nPtBin, "H0", dPtBin);
+
+  rH[1] = (TH1D*)rL->FindObject(Form("hOmegaNeg_Jet10_C04"));
+  auto haa = (TH1D*)rL->FindObject(Form("hOmegaPos_Jet10_C04"));
+  rH[1]->Add(haa);
+  H[1]=(TH1D*)rH[1]->Rebin(nPtBin, "H1", dPtBin);
+
+  H[1]->Divide(H[0]);
+  g[nm+1]= new TGraph(hh[1]);
+  g[nm]= new TGraph(H[1]);
+
 
 //=============================================================================
   auto dflx(0.), dfux(5.);
@@ -276,6 +376,7 @@ void JEPXRatio_DataPy_pp(TString sType = "Omega"){
   //DrawGraph(g[2],  wcl[2], "L");
   //DrawGraph(g[3],  wcl[3], "L");
   DrawGraph(g[4],  wcl[4], "L");
+  DrawGraph(g[5],  wcl[5], "L");
 
   auto leg(new TLegend(0.52, 0.60, 0.98, 0.92)); SetupLegend(leg);
   leg->AddEntry(h, "Data", "LP")->SetTextSizePixels(24);
@@ -283,7 +384,8 @@ void JEPXRatio_DataPy_pp(TString sType = "Omega"){
   leg->AddEntry(g[0], "BLC mode 0", "L")->SetTextSizePixels(24);
   //leg->AddEntry(g[2], "mode 2", "L")->SetTextSizePixels(24);
   //leg->AddEntry(g[3], "mode 3", "L")->SetTextSizePixels(24);
-  leg->AddEntry(g[4], "Rope w/ hard QCD", "L")->SetTextSizePixels(24);
+  leg->AddEntry(g[4], "Rope w/ soft QCD", "L")->SetTextSizePixels(24);
+  leg->AddEntry(g[5], "Rope w/ hard QCD", "L")->SetTextSizePixels(24);
   leg->Draw();
   //leg->AddEntry(gE[0], "Sys. Error", "f")->SetTextSizePixels(24);
 

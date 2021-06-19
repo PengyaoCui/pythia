@@ -87,17 +87,17 @@ int main(int argc, char *argv[])
 
   auto hXsect (new TProfile("hXsect",  "", 1, 0., 1.));
   list_pyxsect->Add(hXsect);
-  
-  auto hJEvent(new TH1D("hJEvent", "", 10, 0., 10.));
-  list_pyxsect->Add(hJEvent);
 
   auto list_results(new TList());
   auto hPtHat(new TH1D("hPtHat", "", 1000, 0., 1000.));
   list_results->Add(hPtHat);
 
+  auto hJEvent(new TH1D("hJEvent", "", 10, 0., 10.));
+  list_results->Add(hJEvent);
+
   //auto hJCSize(new TH1D("hJCSize", "", 10, 0., 10.));
   //list_results->Add(hJCSize);
-  
+
   auto hJet(new TH1D("hJet", "", 500, 0., 500.));
   list_results->Add(hJet);
 
@@ -205,7 +205,6 @@ int main(int argc, char *argv[])
       bool bPC[gknStrgJCs];
       for (const auto &sj : gksJets) {
         for (auto &b : bJC) b = false;
-        
 	for (auto &b : bPC) b = false;
 
         const auto dJetPtCut(JetVal(sj));
@@ -219,7 +218,7 @@ int main(int argc, char *argv[])
           vl2.SetPtEtaPhi(dj, aj.eta(), aj.phi()); vl2.RotateZ(-1.*TMath::PiOver2());
           vu1.SetPtEtaPhi(dj, -1.*aj.eta(), aj.phi()); vu1.RotateZ(TMath::PiOver2());
           vu2.SetPtEtaPhi(dj, -1.*aj.eta(), aj.phi()); vu2.RotateZ(-1.*TMath::PiOver2());
-          
+
 	  double d(vj.DeltaR(strg));
 	  double dl1(vl1.DeltaR(strg));
 	  double dl2(vl2.DeltaR(strg));
@@ -243,7 +242,7 @@ int main(int argc, char *argv[])
             const TString s(Form("h%s_PC%s_%s",ss.Data(),sj.Data(),gksStrgJCs[i].Data()));
             (static_cast<TH1D*>(list_results->FindObject(s.Data())))->Fill(av.pt());
 	  }
-	} 
+	}
       }
     }
 //=============================================================================
@@ -257,7 +256,7 @@ int main(int argc, char *argv[])
   timer.Print();
 //=============================================================================
 
-  hXsect->Fill(0.5, pyInfo.sigmaGen());//the resulting estimated cross section
+  hXsect->Fill(0.5, pyInfo.sigmaGen());
   hTrials->Fill(0.5, pyInfo.weightSum());
 //=============================================================================
 
