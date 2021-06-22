@@ -54,7 +54,7 @@ void JESpectpp_py(TString sType = "Kshort"){
                             rh[0]->Add(hA);
 			    rh[0]->Rebin(2);}
 
-  rh[0]->Scale(1./(137565.*0.06*0.75*TMath::TwoPi()));
+  rh[0]->Scale(1./(69750.*0.06*2.*0.75*TMath::TwoPi()));
   rh[0]->Rebin(5);
   NormBinningHistogram(rh[0]);
 
@@ -76,7 +76,7 @@ void JESpectpp_py(TString sType = "Kshort"){
   //rh[1]->Scale(1./(2.*0.75*TMath::TwoPi()*70.));
   rh[1]->Rebin(5);
   
-  rh[1]->Scale(1./(70.*0.06*0.75*TMath::TwoPi()));
+  rh[1]->Scale(1./(0.422172*0.06*2.*0.75*TMath::TwoPi()));
   NormBinningHistogram(rh[1]);
 
   g[nm] = new TGraph(rh[0]);

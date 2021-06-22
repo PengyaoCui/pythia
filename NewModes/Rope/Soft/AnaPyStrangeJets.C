@@ -85,13 +85,14 @@ int main(int argc, char *argv[])
 
   auto hXsect (new TProfile("hXsect",  "", 1, 0., 1.));
   list_pyxsect->Add(hXsect);
+  
+  auto hJEvent(new TH1D("hJEvent", "", 10, 0., 10.));
+  list_pyxsect->Add(hJEvent);
 
   auto list_results(new TList());
   auto hPtHat(new TH1D("hPtHat", "", 1000, 0., 1000.));
   list_results->Add(hPtHat);
   
-  auto hJEvent(new TH1D("hJEvent", "", 10, 0., 10.));
-  list_results->Add(hJEvent);
 
   //auto hJCSize(new TH1D("hJCSize", "", 10, 0., 10.));
   //list_results->Add(hJCSize);

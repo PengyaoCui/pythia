@@ -51,7 +51,7 @@ void InclSpectpp_py(TString sType = "Kshort"){
   rh[0]->Scale(1./(2.50005e7*2.*0.75*TMath::TwoPi()));
   NormBinningHistogram(rh[0]);
 
-  auto hf = TFile::Open("./data/Rope/Hard_In.root", "read");
+  auto hf = TFile::Open("./data/Rope/Hard_J.root", "read");
   auto hl = (TList*)hf->Get(Form("list_results"));
   hf->Close();
   rh[1] = (TH1D*)hl->FindObject(Form("h%s", sType.Data()));

@@ -7,6 +7,7 @@ const auto  gknb(sizeof(gklb) / sizeof(Int_t) - 1);
 
 TString  GetFileName(const Int_t);
 Double_t GetNormFactor(TList *, const Int_t);
+Double_t GetJetEventWeight();
 void     Normalization(TList *, const Int_t);
 //=============================================================================
 
@@ -41,6 +42,7 @@ void Normalization(TList *lr, const Int_t l)
 //=============================================================================
 
   const auto dn(GetNormFactor(ln,l));
+  const auto dr(GetJetEventWeight());
 //=============================================================================
 
   TIter next(lh);
@@ -53,6 +55,7 @@ void Normalization(TList *lr, const Int_t l)
     auto ha(static_cast<TH1D*>(lr->FindObject(sh.Data())));
     if (ha) {
       ha->Add(hb);
+      //ha->Scale(1./dr);
     } else {
       lr->Add(static_cast<TH1D*>(hb->Clone(sh.Data())));
     }
@@ -75,9 +78,32 @@ Double_t GetNormFactor(TList *ln, const Int_t l)
   hx->SetName(Form("%s_%d",hx->GetName(),l));
 
   return (hx->GetBinContent(1) / hn->GetBinContent(1));
-  //return (hx->GetBinContent(1) / hn->GetEntries());
 }
 
+//_____________________________________________________________________________
+Double_t GetJetEventWeight()
+{
+  auto r(0.);
+  for (auto i=0; i<gknb; ++i){
+    auto sf(GetFileName(i));
+//=============================================================================
+
+    auto f(TFile::Open(sf.Data(),"READ"));
+    auto ln(static_cast<TList*>(f->Get("list_pyxsect")));
+    f->Close();
+    auto hn(static_cast<TH1D*>(ln->FindObject("hTrials")));
+    hn->SetName(Form("%s_%d",hn->GetName(),i));
+    
+    auto hj(static_cast<TH1D*>(ln->FindObject("hJEvent")));
+    hj->SetName(Form("%s_%d",hj->GetName(),i));
+
+    auto hx(static_cast<TProfile*>(ln->FindObject("hXsect")));
+    hx->SetName(Form("%s_%d",hx->GetName(),i));
+    r = r + ((hx->GetBinContent(1) * hj->GetEntries()) / hn->GetBinContent(1));
+  }
+
+  return (r);
+}
 //_____________________________________________________________________________
 TString GetFileName(const Int_t l)
 {
